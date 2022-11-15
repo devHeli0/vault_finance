@@ -3,7 +3,7 @@ dotenv.config();
 
 import "reflect-metadata";
 import express from "express";
-import myDataSource from "../myDataSource";
+const myDataSource = require("../myDataSource") ;
 
 // establish database connection
 myDataSource.initialize()
