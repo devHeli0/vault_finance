@@ -1,8 +1,8 @@
-import { BaseConnectionOptions } from "../../connection/BaseConnectionOptions";
+import { BaseDataSourceOptions } from "../../data-source/BaseDataSourceOptions";
 /**
  * NativeScript-specific connection options.
  */
-export interface NativescriptConnectionOptions extends BaseConnectionOptions {
+export interface NativescriptConnectionOptions extends BaseDataSourceOptions {
     /**
      * Database type.
      */
@@ -41,4 +41,5 @@ export interface NativescriptConnectionOptions extends BaseConnectionOptions {
      * Flags to pass to SQLite when opening the database on Android. (see https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html)
      */
     readonly androidFlags?: number;
+    readonly poolSize?: never;
 }

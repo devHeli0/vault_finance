@@ -1,8 +1,8 @@
-import { BaseConnectionOptions } from "../../connection/BaseConnectionOptions";
+import { BaseDataSourceOptions } from "../../data-source/BaseDataSourceOptions";
 /**
  * Sqlite-specific connection options.
  */
-export interface CapacitorConnectionOptions extends BaseConnectionOptions {
+export interface CapacitorConnectionOptions extends BaseDataSourceOptions {
     /**
      * Database type.
      */
@@ -27,4 +27,5 @@ export interface CapacitorConnectionOptions extends BaseConnectionOptions {
      * The SQLite journal mode (optional)
      */
     readonly journalMode?: "DELETE" | "TRUNCATE" | "PERSIST" | "MEMORY" | "WAL" | "OFF";
+    readonly poolSize?: never;
 }
