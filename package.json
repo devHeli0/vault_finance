@@ -1,38 +1,27 @@
 {
-  "name": "ng_app",
+  "name": "ngapp",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "repository": "https://github.com/Helio-scNeto/NG_APP.git",
+  "author": "Hélio Neto <hdsn211@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "dev:server": "ts-node-dev -r tsconfig-paths/register  --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "ts-node src/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/myDataSource.ts",
-    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/myDataSource.ts",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/myDataSource.ts"
+    "dev":"nodemon --exec ts-node ./src/index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Helio-scNeto/NG_APP.git"
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.9",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.9.3"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Helio-scNeto/NG_APP/issues"
-  },
-  "homepage": "https://github.com/Helio-scNeto/NG_APP#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.7"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.14",
-    "@types/node": "^18.11.9",
-    "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.1.0"
+    "typeorm": "^0.3.10"
   }
 }
