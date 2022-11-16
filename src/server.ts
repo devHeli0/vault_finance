@@ -1,20 +1,15 @@
-import dotenv from 'dotenv'
-dotenv.config();
-
-import "reflect-metadata";
 import express from "express";
-const myDataSource = require("../myDataSource") ;
+import { AppDataSource } from "./data-source";
 
-// establish database connection
-myDataSource.initialize()
-  .then(() => {
-    console.log("Data Source has been initialized!");
-  })
-  .catch((err) => {
-    console.error("Error during Data Source initialization:", err);
-  });
+AppDataSource.initialize().then(()=>{
+    const app = express();
 
-// create and setup express app
-const app = express();
-app.use(express.json());
-app.listen(3000, () => console.log("Running!"))
+    app.use(express.json());
+
+    app.get('/', (req, res) => {
+        return res.json('tudo certo')
+    })
+
+    app.listen(process.env.PORT, () => console.log("Running!"))
+})
+
