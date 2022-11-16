@@ -8,9 +8,9 @@
     "dev:server": "ts-node-dev -r tsconfig-paths/register  --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "start": "ts-node src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/modules/config/ormconfig.ts",
-    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
+    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/myDataSource.ts",
+    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/myDataSource.ts",
+    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/myDataSource.ts"
   },
   "repository": {
     "type": "git",

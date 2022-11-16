@@ -12,5 +12,4 @@ const myDataSource = new DataSource({
   synchronize: true,
 });
 
-
 export default myDataSource;
