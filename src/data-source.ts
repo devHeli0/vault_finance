@@ -14,5 +14,4 @@ export const AppDataSource = new DataSource({
     database: process.env.TYPEORM_DATABASE,
     entities: [`${__dirname}/**/entitties/*.{ts,js}`],
     migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
-    migrationsTableName: "custom_migration_table"
 })

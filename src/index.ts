@@ -10,5 +10,5 @@ AppDataSource.initialize().then(()=>{
         return res.json('tudo certo')
     })
 
-    app.listen(process.env.PORT, () => console.log("Running!"))
+    app.listen(process.env.PORT || 3000, () => console.log("Running!"))
 })
