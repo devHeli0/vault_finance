@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Accounts } from "./Accounts";
 import { Transaction } from './Transactions'
 
 @Entity('users')
@@ -14,4 +15,7 @@ export class User {
 
     @OneToMany(() => Transaction, transaction => transaction.user)
     transactions: Transaction[]
+
+    @JoinColumn({name: 'account_id'})
+    account: Accounts
 }

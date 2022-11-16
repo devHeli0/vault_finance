@@ -6,7 +6,12 @@
   "author": "Hélio Neto <hdsn211@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev":"nodemon --exec ts-node ./src/index.ts"
+		"dev": "nodemon --exec ts-node ./src/index.ts",
+    "typeorm":"typeorm-ts-node-commonjs -d ./src/data-source.ts",
+		"migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
+		"migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
+		"build": "rm -rf ./dist && tsc",
+		"start": "node ./dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
