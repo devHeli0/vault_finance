@@ -2,17 +2,16 @@ import { Request, Response } from 'express';
 import AccountModel from '../database/models/AccountModel';
 import TransactionModel from '../database/models/TransactionModel';
 import UserModel from '../database/models/UserModel';
-var jwt = require('jsonwebtoken');//import pode n reconherecer, teste antes de usar
+var jwt = require('jsonwebtoken'); //import pode n reconherecer, teste antes de usar
 
 class TransactionController {
-
   public async trans(
     req: Request,
     res: Response
-  ): Promise<Response|void> {
+  ): Promise<Response | void> {
     const { username, value } = req.body;
 
-    console.log(`${username}`)
+    console.log(`${username}`);
 
     let user = await UserModel.findOne({
       where: { username },
@@ -33,12 +32,10 @@ class TransactionController {
     //   value: req.body.value,
     // });
 
-    console.log(tDebit)
-    return res.json(tDebit)
+    console.log(tDebit);
+    return res.json(tDebit);
 
     //return res.json({user: req.userName})
-
   }
-
 }
 export default new TransactionController();

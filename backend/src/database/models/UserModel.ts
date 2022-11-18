@@ -2,7 +2,6 @@ import { Model, DataTypes } from 'sequelize';
 import IUser from '../../interfaces/IUser';
 import { sequelize } from '../config/database';
 import AccountModel from './AccountModel';
-import TransactionModel from './TransactionModel';
 
 interface UserModel extends IUser {}
 

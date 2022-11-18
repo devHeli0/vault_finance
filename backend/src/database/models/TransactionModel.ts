@@ -26,8 +26,7 @@ TransactionModel.init(
     creditedAccountId: {
       type: DataTypes.INTEGER,
       unique: false,
-      field: 'creditedAccountId',
-      
+      field: 'creditedAccountId', 
     },
     value: {
       field: 'value',

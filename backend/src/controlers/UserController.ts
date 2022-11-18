@@ -51,6 +51,7 @@ class UserController {
     });
 
     console.log(user, req.body);
+    
     const password_valid = await bcrypt.compare(
       password,
       user.password
@@ -64,7 +65,14 @@ class UserController {
     if (!password_valid) {
       return res.status(400).send({ message: 'Senha incorreta.' });
     }
-    return res.json(user);
+    
+    const AcessToken = jwt.sign({id: user.id}, 'secret', {expiresIn: '24h'})
+    const answer = {
+      username: user.username,
+      password: user.password,
+      AcessToken: AcessToken
+    };
+    return res.json(answer);
   }
 }
 export default new UserController();

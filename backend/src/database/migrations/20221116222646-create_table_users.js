@@ -29,7 +29,7 @@ module.exports = {
       },
       accountId: {
         field: 'accountId',
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         unique: true,
       },
     });
