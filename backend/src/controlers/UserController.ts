@@ -11,7 +11,10 @@ class UserController {
   ): Promise<Response> {
     const { username, password } = req.body;
 
-    if (password.length < 8) return res.status(400).send('Senha deve ter ao menos 8 caracteres!');
+    if (password.length < 8)
+      return res
+        .status(400)
+        .send('Senha deve ter ao menos 8 caracteres!');
 
     let user = await UserModel.findOne({
       where: { username },
@@ -46,7 +49,7 @@ class UserController {
     let user = await UserModel.findOne({
       where: { username },
     });
-    
+
     console.log(user, req.body);
     const password_valid = await bcrypt.compare(
       password,
@@ -61,9 +64,7 @@ class UserController {
     if (!password_valid) {
       return res.status(400).send({ message: 'Senha incorreta.' });
     }
-    return res.json(user,);
+    return res.json(user);
   }
-
-  }
-
+}
 export default new UserController();

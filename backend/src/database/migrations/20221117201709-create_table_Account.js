@@ -2,8 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-  
+  async up(queryInterface, Sequelize) {
     return queryInterface.createTable('Accounts', {
       id: {
         field: 'id',
@@ -13,15 +12,14 @@ module.exports = {
         primaryKey: true,
       },
       balance: {
-        field: "balance",
+        field: 'balance',
         type: Sequelize.FLOAT,
-        defaultValue: 100.00
+        defaultValue: 100.0,
       },
-    })
+    });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Account');
-  }
+  },
 };
-

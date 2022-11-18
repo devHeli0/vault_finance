@@ -1,6 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
 import IAccount from '../../interfaces/IAccount';
-import TransactionModel from './TransactionModel'
 import { sequelize } from '../config/database';
 
 interface AccountModel extends IAccount {}

@@ -55,5 +55,5 @@ TransactionModel.init(
 
 export default TransactionModel;
 
-//AccountModel.hasMany(TransactionModel, {foreignKey: {name: "creditedAccountId"}})
-//AccountModel.hasMany(TransactionModel, {foreignKey: {name: "debitedAccountId"}})
+AccountModel.hasMany(TransactionModel, {foreignKey: {name: "creditedAccountId"}})
+AccountModel.hasMany(TransactionModel, {foreignKey: {name: "debitedAccountId"}})
