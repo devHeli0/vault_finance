@@ -2,11 +2,7 @@ import { Request, Response } from 'express';
 import UserModel from '../database/models/UserModel';
 import * as bcrypt from 'bcrypt';
 import AccountModel from '../database/models/AccountModel';
-<<<<<<< HEAD:backend/src/controlers/UserController.ts
 var jwt = require('jsonwebtoken');
-=======
-import jwt from 'jws';
->>>>>>> parent of 3851791 (JWT):backend/src/controlers/UsersController.ts
 
 class UserController {
   public async register(
@@ -50,9 +46,8 @@ class UserController {
     let user = await UserModel.findOne({
       where: { username },
     });
-
+    
     console.log(user, req.body);
-
     const password_valid = await bcrypt.compare(
       password,
       user.password
@@ -63,25 +58,12 @@ class UserController {
         .status(400)
         .send({ message: 'Usuário não não encontrado.' });
     }
-
     if (!password_valid) {
       return res.status(400).send({ message: 'Senha incorreta.' });
     }
-
-    const accessToken = user.id;
-<<<<<<< HEAD:backend/src/controlers/UserController.ts
-
-    jwt.sign(accessToken, 'SECRET', {espiresIn: '24h'})
-
-    return res.json(user, accessToken);
+    return res.json(user,);
   }
-=======
->>>>>>> parent of 3851791 (JWT):backend/src/controlers/UsersController.ts
 
-    jwt.sign(accessToken, 'SECRET', {espiresIn: '24h'})
-
-    return res.json(user, accessToken);
   }
-}
 
 export default new UserController();
