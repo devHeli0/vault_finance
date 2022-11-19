@@ -1,5 +1,5 @@
 import express from 'express';
-import RegisterRoute from './routes/registerRoute';
+import RegisterRoute from './routes/RegisterRoute';
 import transactionRoute from './routes/transactionRoute';
 import UserRoute from './routes/UserRoute';
 require('dotenv').config();
