@@ -4,6 +4,6 @@ import AuthMiddleware from '../middlewares/AuthMiddleware';
 
 const transactionRoute = Router();
 
-transactionRoute.post('/:username', AuthMiddleware.authUserByToken,TransactionController.trans)
+transactionRoute.post('/transaction', AuthMiddleware.authUserByToken,TransactionController.trans)
 
 export default transactionRoute;

@@ -31,6 +31,11 @@ module.exports = {
         field: 'accountId',
         type: Sequelize.INTEGER,
         unique: true,
+        refereces: {
+          model: 'Accounts',
+          key: 'id',
+          as: 'accountId'
+        },
       },
     });
   },

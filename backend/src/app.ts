@@ -23,9 +23,9 @@ export class App {
   private routes() {
     this.express.use(express.urlencoded())
     this.express.use(express.json())
-    this.express.use('/register', RegisterRoute);
-    this.express.use('/user', UserRoute);
-    this.express.use('/transactions', transactionRoute);
+    this.express.use('/', RegisterRoute);
+    this.express.use('/', UserRoute);
+    this.express.use('/', transactionRoute);
   }
 
   private listen(): void {

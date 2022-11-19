@@ -9,33 +9,19 @@ class TransactionController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    const { username, value } = req.body;
+    const { username } = req.body;
 
-    console.log(`${username}`);
+    try {
+      const users = await UserModel.findOne({where: {user: username}});
+      
+      res.json(users);
 
-    let user = await UserModel.findOne({
-      where: { username },
-    });
-
-    if (!user) return res.status(400).send('Usuário não existe!');
-
-    const account = await AccountModel.create();
-
-    const tDebit = await TransactionModel.create({
-      debitedAccountId: account.id,
-      value: value,
-    });
-
-    // const tCredit = await TransactionModel.create({
-    //   id: transactionId.id,
-    //   CreditedAccountId: 'req.params.username' ,
-    //   value: req.body.value,
-    // });
-
-    console.log(tDebit);
-    return res.json(tDebit);
-
-    //return res.json({user: req.userName})
+    } catch (error) {
+      console.log('ERROR');
+      res
+        .status(500)
+        .json({ error: 'Falha ao encontrar o usuário!' });
+    }
   }
 }
 export default new TransactionController();

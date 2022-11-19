@@ -4,7 +4,17 @@ import { sequelize } from '../config/database';
 
 interface AccountModel extends IAccount {}
 
-class AccountModel extends Model {}
+class AccountModel extends Model {
+  static associate(models) {
+    AccountModel.belongsTo(models.UserModel, {
+      foreignKey: 'id',
+    });
+
+    AccountModel.hasMany(models.TransactionModel, {
+      foreignKey: 'debitedAccountId' || 'creditedAccountId',
+    });
+  }
+}
 
 AccountModel.init(
   {
@@ -27,4 +37,3 @@ AccountModel.init(
 );
 
 export default AccountModel;
-

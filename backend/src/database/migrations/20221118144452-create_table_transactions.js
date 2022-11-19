@@ -18,14 +18,24 @@ module.exports = {
         validate: {
           notEmpty: true,
         },
+        refereces: {
+          model: 'Accounts',
+          key: 'id',
+          as: 'accountId'
+        },
       },
       creditedAccountId: {
-        field: 'creditedAccountId',
+        field: 'debitedAccountId',
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
-        }
+        },
+        refereces: {
+          model: 'Accounts',
+          key: 'id',
+          as: 'creditedAccountId'
+        },
       },
       value: {
         field: 'value',

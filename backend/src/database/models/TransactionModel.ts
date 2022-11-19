@@ -1,12 +1,17 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, Transaction } from 'sequelize';
 import { sequelize } from '../config/database';
 import ITransaction from '../../interfaces/ITransaction';
 import AccountModel from './AccountModel';
 
-
 interface TransactionModel extends ITransaction {}
 
-class TransactionModel extends Model {}
+class TransactionModel extends Model {
+  static associate(models) {
+    TransactionModel.belongsTo(models.AccountModel, {
+      foreignKey: 'debitedAccountId' && 'creditedAccountId',
+    });
+  }
+}
 
 TransactionModel.init(
   {
@@ -18,15 +23,14 @@ TransactionModel.init(
       primaryKey: true,
     },
     debitedAccountId: {
+      field: 'debitedAccountId',
       type: DataTypes.INTEGER,
       unique: false,
-      field: 'debitedAccountId',
-      //references: {model: 'Accounts', key: 'id'}
     },
     creditedAccountId: {
+      field: 'creditedAccountId',
       type: DataTypes.INTEGER,
       unique: false,
-      field: 'creditedAccountId', 
     },
     value: {
       field: 'value',
@@ -54,5 +58,9 @@ TransactionModel.init(
 
 export default TransactionModel;
 
-AccountModel.hasMany(TransactionModel, {foreignKey: {name: "creditedAccountId"}})
-AccountModel.hasMany(TransactionModel, {foreignKey: {name: "debitedAccountId"}})
+// AccountModel.hasMany(TransactionModel, {
+//   foreignKey: { name: 'creditedAccountId' },
+// });
+// AccountModel.hasMany(TransactionModel, {
+//   foreignKey: { name: 'debitedAccountId' },
+// });

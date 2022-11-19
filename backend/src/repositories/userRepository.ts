@@ -10,5 +10,4 @@ export default class UserRepository {
     const User = await this.user.findAll();
     return User;
   }
-
 }

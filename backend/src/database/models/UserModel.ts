@@ -5,7 +5,13 @@ import AccountModel from './AccountModel';
 
 interface UserModel extends IUser {}
 
-class UserModel extends Model {}
+class UserModel extends Model {
+  static associate(models) {
+    UserModel.hasOne(AccountModel, {
+      foreignKey: { name: 'accountId' },
+    });
+  }
+}
 
 UserModel.init(
   {
@@ -45,7 +51,6 @@ UserModel.init(
   }
 );
 
-AccountModel.hasOne(UserModel, {foreignKey: {name: "accountId"}})
 //UserModel.belongsTo(AccountModel)
 
 export default UserModel;

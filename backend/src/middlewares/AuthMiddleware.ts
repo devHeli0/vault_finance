@@ -17,7 +17,7 @@ class AuthMiddleware {
     try {
       const decoded = jwt.verify(token, 'secret');
       
-      const { id, user } = decoded;
+      const { id, user } = decoded;//eu sei que tem id e user, em algum momento preciso do user
 
       req.userId = id;
       req.userName = user;
