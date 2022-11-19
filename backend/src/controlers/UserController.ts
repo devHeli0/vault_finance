@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import UserModel from '../database/models/UserModel';
 import * as bcrypt from 'bcrypt';
 import AccountModel from '../database/models/AccountModel';
+import UserRepository from '../repositories/userRepository';
 var jwt = require('jsonwebtoken');
 
 class UserController {
@@ -32,9 +33,9 @@ class UserController {
 
     const answer = {
       message: 'Usuário cadastrado com sucesso!',
-      id: user.id,
-      username: user.username,
-      balance: account.balance,
+      //id: user.id,
+      //username: user.username,
+      //balance: account.balance,
     };
 
     return res.json(answer);
@@ -44,29 +45,30 @@ class UserController {
     req: Request,
     res: Response
   ): Promise<Response> {
+
     const { username, password } = req.body;
 
     let user = await UserModel.findOne({
       where: { username },
     });
 
-    console.log(user, req.body);
+    if (!user) {
+      return res
+        .status(400)
+        .send({ message: 'Usuário ou senha inválido!' });
+    }
     
     const password_valid = await bcrypt.compare(
       password,
       user.password
     );
-
-    if (!user) {
-      return res
-        .status(400)
-        .send({ message: 'Usuário não não encontrado.' });
-    }
+    
     if (!password_valid) {
-      return res.status(400).send({ message: 'Senha incorreta.' });
+      return res.status(400).send({ message: 'Usuário ou senha inválido!' });
     }
     
     const AcessToken = jwt.sign({id: user.id}, 'secret', {expiresIn: '24h'})
+
     const answer = {
       username: user.username,
       password: user.password,
@@ -74,5 +76,6 @@ class UserController {
     };
     return res.json(answer);
   }
+
 }
 export default new UserController();

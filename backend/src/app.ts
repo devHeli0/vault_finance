@@ -1,7 +1,7 @@
 import express from 'express';
-import { Transaction } from 'sequelize';
+import RegisterRoute from './routes/registerRoute';
 import transactionRoute from './routes/transactionRoute';
-import UserRoute from './routes/userRoute';
+import UserRoute from './routes/UserRoute';
 require('dotenv').config();
 
 
@@ -23,6 +23,7 @@ export class App {
   private routes() {
     this.express.use(express.urlencoded())
     this.express.use(express.json())
+    this.express.use('/register', RegisterRoute);
     this.express.use('/user', UserRoute);
     this.express.use('/transactions', transactionRoute);
   }
