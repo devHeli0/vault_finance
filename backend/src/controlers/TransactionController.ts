@@ -29,11 +29,13 @@ class TransactionController {
         .json({ error: 'Falha ao encontrar o usuário!' });
     }
   }
+
   public async cashout(
     req: Request,
     res: Response
   ): Promise<Response | void>{
     const username = req.body;
+
 
     try {
       const user = await UserModel.findOne({
@@ -42,17 +44,20 @@ class TransactionController {
         raw: true,
       });
 
-      const accountId = await UserModel.findOne({
+      const accounter = await UserModel.findOne({
         where:  username,
         attributes: ['accountId'],
         raw: true,
       });
 
+     const  accountId2 = accounter.accountId
+     
       const debited = await AccountModel.findOne({
-        where: {id: accountId},
-        attributes: ['id','balance'],
+        where: {id: accountId2},
+        attributes: ['id'],
         raw: true,
       });
+
 
       return res.json(debited);
 

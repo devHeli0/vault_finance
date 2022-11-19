@@ -9,15 +9,17 @@ class AccountController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
+
     let user = await AccountModel.findByPk(req.userId);
-    return res.json(user);
+
+    const answer = {
+      balance: user.balance,
+    };
+
+    req.userId
+
+    return res.json(answer);
   }
-  public async getUser(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
-    let user = await AccountModel.findOne(req.body.username);
-    return res.json(user);
-  }
+ 
 }
 export default new AccountController();
