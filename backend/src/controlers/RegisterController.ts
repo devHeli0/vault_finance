@@ -20,24 +20,27 @@ class RegisterController {
       where: { username },
     });
 
-    if (user) return res.status(400).send('Usuário já existe!');
+    if (user) {
+      //return res.status(400).send('Usuário já existe!');
+      return res.json('Usuário já existe!')
+    } else {
+      const account = await AccountModel.create();
 
-    const account = await AccountModel.create();
+      user = await UserModel.create({
+        username,
+        password: await bcrypt.hash(password, 8),
+        accountId: account.id,
+      });
 
-    user = await UserModel.create({
-      username,
-      password: await bcrypt.hash(password, 8),
-      accountId: account.id,
-    });
+      const answer = {
+        message: 'Usuário cadastrado com sucesso! VERMMELHO',
+        //id: user.id,
+        //username: user.username,
+        //balance: account.balance,
+      };
 
-    const answer = {
-      message: 'Usuário cadastrado com sucesso!',
-      //id: user.id,
-      //username: user.username,
-      //balance: account.balance,
-    };
-
-    return res.json(answer);
+      return res.json(answer);
+    }
   }
 }
 export default new RegisterController();

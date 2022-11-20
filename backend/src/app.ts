@@ -3,6 +3,10 @@ import AccountRoute from './routes/AccountRoute';
 import RegisterRoute from './routes/RegisterRoute';
 import transactionRoute from './routes/transactionRoute';
 import UserRoute from './routes/UserRoute';
+import cors from 'cors';
+
+
+
 require('dotenv').config();
 
 
@@ -16,14 +20,17 @@ export class App {
     this.routes();
     this.listen();
   }
+  
 
   public getApp(): express.Application {
+    
     return this.express;
   }
 
   private routes() {
     this.express.use(express.urlencoded())
     this.express.use(express.json())
+    this.express.use(cors())
     this.express.use('/', RegisterRoute);
     this.express.use('/', UserRoute);
     this.express.use('/', AccountRoute);

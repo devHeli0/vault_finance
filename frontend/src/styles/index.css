@@ -34,7 +34,7 @@ html {
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
-.login-form {
+.form {
   width: 100%;
 }
 
@@ -150,7 +150,7 @@ html {
   padding-bottom: 13px;
 }
 
-.login-btn {
+.form-btn {
   font-size: 15px;
   border: none;
   border-radius: 10px;
@@ -169,7 +169,7 @@ html {
   background: linear-gradient(to left, #21d4fd, #b721ff);
 }
 
-.login-btn:hover {
+.form-btn:hover {
   cursor: pointer;
 }
 
