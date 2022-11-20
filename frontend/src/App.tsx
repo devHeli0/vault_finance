@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import './App.css';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import  Register  from './pages/Cadastro';
 import Login from './pages/Login'
@@ -15,12 +14,9 @@ function App() {
     await auth.signout();
     navigate('/')
   }
-
+  
   return (
-    <div className="App">
-      <header>
-        <h1>NG:APP</h1>
-      </header>
+    <div>
       <Routes>
         <Route path="/" element={<RequireAuth><Login /></RequireAuth>}/>
         <Route path="/cadastro" element={<Register />}/>
