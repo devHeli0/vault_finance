@@ -9,6 +9,7 @@ const Account = () => {
   return (
     <div>
       <h2>Página Fechada</h2>
+      Olá {auth.user?.name}
     </div>
   );
 };
