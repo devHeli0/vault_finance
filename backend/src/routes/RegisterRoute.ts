@@ -3,6 +3,6 @@ import RegisterController from '../controlers/RegisterController';
 
 const RegisterRoute = Router();
 
-RegisterRoute.post('/register', RegisterController.register)
+RegisterRoute.post('/cadastro', RegisterController.register)
 
 export default RegisterRoute;

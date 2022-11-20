@@ -1,4 +1,5 @@
 import express from 'express';
+import AccountRoute from './routes/AccountRoute';
 import RegisterRoute from './routes/RegisterRoute';
 import transactionRoute from './routes/transactionRoute';
 import UserRoute from './routes/UserRoute';
@@ -25,6 +26,7 @@ export class App {
     this.express.use(express.json())
     this.express.use('/', RegisterRoute);
     this.express.use('/', UserRoute);
+    this.express.use('/', AccountRoute);
     this.express.use('/', transactionRoute);
   }
 

@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 
 const Login = () => {
@@ -47,6 +47,10 @@ const Login = () => {
         placeholder="Digite sua senha"
       />
       <button onClick={handleLogin}>Logar</button>
+      <nav>
+      <hr />
+          <Link to="/cadastro">Ainda não tem um conta? Cadastre-se</Link>     
+        </nav>
     </div>
   );
 };

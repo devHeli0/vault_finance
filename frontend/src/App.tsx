@@ -20,12 +20,7 @@ function App() {
     <div className="App">
       <header>
         <h1>NG:APP</h1>
-        <nav>
-          <Link to="/cadastro">Ainda não tem um conta? Cadastre-se</Link>
-          {auth.user && <button onClick={handleLogout}>Sair</button>}
-        </nav>
       </header>
-      <hr />
       <Routes>
         <Route path="/" element={<RequireAuth><Login /></RequireAuth>}/>
         <Route path="/cadastro" element={<Register />}/>
