@@ -1,38 +1,54 @@
-import { useContext, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 
-export const Login = () => {
+const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [username, setUserName] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleusernameInput = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setusername(event.target.value);
+  };
+
+  const handlePasswordInput = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setPassword(event.target.value);
+  };
 
   const handleLogin = async () => {
     if (username && password) {
-      const Logged = await auth.signin(username, password);
-
-      Logged ? navigate('/') : alert('Não deu certo.');
+      const isLogged = await auth.signin(username, password);
+      if (isLogged) {
+        navigate('/account');
+      } else {
+        alert('Não deu certo.');
+      }
     }
   };
 
   return (
     <div>
-      <h2>Acesso restrito!</h2>
       <input
         type="text"
         value={username}
-        onChange={(e) => setUserName(e.target.value)}
-        placeholder="Digite seu username"
+        onChange={handleusernameInput}
+        placeholder="Digite seu e-mail"
       />
       <input
-        type="text"
+        type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handlePasswordInput}
         placeholder="Digite sua senha"
       />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin}>Logar</button>
     </div>
   );
 };
+
+export default Login;

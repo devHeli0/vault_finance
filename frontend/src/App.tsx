@@ -1,30 +1,35 @@
+import { useContext } from 'react';
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Private } from './pages/Private';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import  Register  from './pages/Cadastro';
+import Login from './pages/Login'
+import Account from './pages/Account'
 import { RequireAuth } from './contexts/Auth/RequireAuth';
+import { AuthContext } from './contexts/Auth/AuthContext';
 
 function App() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await auth.signout();
+    navigate('/')
+  }
+
   return (
     <div className="App">
       <header>
-        Cadastro
+        <h1>NG:APP</h1>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/private">Private</Link>
+          <Link to="/cadastro">Ainda não tem um conta? Cadastre-se</Link>
+          {auth.user && <button onClick={handleLogout}>Sair</button>}
         </nav>
       </header>
       <hr />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/private"
-          element={
-            <RequireAuth>
-              <Private />
-            </RequireAuth>
-          }
-        />
+        <Route path="/" element={<RequireAuth><Login /></RequireAuth>}/>
+        <Route path="/cadastro" element={<Register />}/>
+        <Route path="/account" element={<Account />}/>
       </Routes>
     </div>
   );
