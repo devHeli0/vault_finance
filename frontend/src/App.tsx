@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import  Register  from './pages/Cadastro';
 import Login from './pages/Login'
 import Account from './pages/Account'
-import { CRequire } from './contexts/Auth/CRequire';
+import { RequireAuth } from './contexts/Auth/RequireAuth';
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/cadastro" element={<Register />}/>
-        <Route path="/account" element={<CRequire><Account /></CRequire>}/>
+        <Route path="/account" element={<Account />} />
       </Routes>
     </div>
   );

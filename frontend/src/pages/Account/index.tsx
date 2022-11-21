@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 const Account = () => {
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
+  const handleLogout = async (e: any) => {
+    e.preventDefault();
     navigate('/')
   }
- 
+  
   return (
-    <div>
+    <div className='wrap'>
       <h2>Página Fechada</h2>
       {<button onClick={handleLogout}>Sair</button>}
     </div>

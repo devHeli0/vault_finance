@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import AccountModel from '../database/models/AccountModel';
-import UserModel from '../database/models/UserModel';
-import UserController from './UserController';
 var jwt = require('jsonwebtoken'); //import pode n reconherecer, teste antes de usar
 
 class AccountController {
@@ -15,8 +13,6 @@ class AccountController {
     const answer = {
       balance: user.balance,
     };
-
-    req.userId
 
     return res.json(answer);
   }

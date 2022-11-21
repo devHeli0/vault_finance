@@ -13,29 +13,29 @@ module.exports = {
       },
       debitedAccountId: {
         field: 'debitedAccountId',
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: true,
         validate: {
-          notEmpty: true,
+          notEmpty: false,
         },
-        refereces: {
-          model: 'Accounts',
-          key: 'id',
-          as: 'accountId'
-        },
+        // refereces: {
+        //   model: 'Accounts',
+        //   key: 'id',
+        //   as: 'accountId'
+        // },
       },
       creditedAccountId: {
-        field: 'debitedAccountId',
-        type: Sequelize.STRING,
-        allowNull: false,
+        field: 'creditedAccountId',
+        type: Sequelize.INTEGER,
+        allowNull: true,
         validate: {
-          notEmpty: true,
+          notEmpty: false,
         },
-        refereces: {
-          model: 'Accounts',
-          key: 'id',
-          as: 'creditedAccountId'
-        },
+        // refereces: {
+        //   model: 'Accounts',
+        //   key: 'id',
+        //   as: 'accountId'
+        // },
       },
       value: {
         field: 'value',
@@ -46,13 +46,21 @@ module.exports = {
         },
       },
       createdAt:{
-        field: 'created_at',
+        field: 'createdAt',
         type: Sequelize.DATE,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
-      }
+      },
+      updatedAt: {
+        field: 'updatedAt',
+        type: Sequelize.DATE,
+        allowNull: true,
+        validate: {
+          notEmpty: false,
+        },
+      },
     });
   },
   async down (queryInterface, Sequelize) {

@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
 import { Layout } from '../../Layout';
-import { apiLink } from '../../hooks/useApi';
+import { api } from '../../hooks/useApi';
+
 
 const Register = () => {
   //const auth = useContext(AuthContext);
@@ -14,9 +15,8 @@ const Register = () => {
   const handleRegister = async (e: any) => {
     e.preventDefault();
     const data = { username, password };
-    const answer = await apiLink.post('/cadastro', data);
-    //lembre de dar uma alerta na janela pra user criado
-    window.alert(answer.data);
+    const answer = await api.post('/cadastro', data);
+    window.alert(answer.data.message);
     navigate('/');
   };
 

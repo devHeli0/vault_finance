@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { CProvider } from './contexts/Auth/CProvider';
+import { AuthProvider } from './contexts/Auth/AuthProvider';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <CProvider>
+    <AuthProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-      </CProvider>
+      </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

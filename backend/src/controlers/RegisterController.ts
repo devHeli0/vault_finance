@@ -33,7 +33,7 @@ class RegisterController {
       });
 
       const answer = {
-        message: 'Usuário cadastrado com sucesso! VERMMELHO',
+        message: 'Usuário cadastrado com sucesso!',
         //id: user.id,
         //username: user.username,
         //balance: account.balance,

@@ -1,72 +1,99 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
+import { mapValueFieldNames } from 'sequelize/types/utils';
 import AccountModel from '../database/models/AccountModel';
 import TransactionModel from '../database/models/TransactionModel';
 import UserModel from '../database/models/UserModel';
 var jwt = require('jsonwebtoken'); //import pode n reconherecer, teste antes de usar
 
 class TransactionController {
-  public async getAccountByName(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
-    const username = req.body;
-
-    try {
-      const user = await UserModel.findOne({
-        where:  username,
-        attributes: ['username'],
-        raw: true,
-      });
-
-      // const answer = {
-      //   username: user.username,
-      // };
-      return res.json(user);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: 'Falha ao encontrar o usuário!' });
-    }
-  }
-
   public async cashout(
     req: Request,
     res: Response
-  ): Promise<Response | void>{
-    const username = req.body;
+  ): Promise<Response | void> {
+    const { username, payment, value } = req.body;
 
+    const account = await UserModel.findOne({
+      where: { username },
+      attributes: ['accountId'],
+    });
 
-    try {
-      const user = await UserModel.findOne({
-        where:  username,
-        attributes: ['username'],
-        raw: true,
-      });
+    let paying = await AccountModel.findByPk(req.userId);
+    let payed = await AccountModel.findByPk(account.accountId);
 
-      const accounter = await UserModel.findOne({
-        where:  username,
-        attributes: ['accountId'],
-        raw: true,
-      });
+    if (payment !== "debit" && payment !== "credit") {
+       res.json('Selecione uma opção de pagamento')
+    } else {
+      if (paying.balance >= value) {
+        try {
+          if (payment == "debit") {
+            const transaction = await TransactionModel.create({
+              debitedAccountId: account.accountId,
+              value: value,
+            });
 
-     const  accountId2 = accounter.accountId
-     
-      const debited = await AccountModel.findOne({
-        where: {id: accountId2},
-        attributes: ['id'],
-        raw: true,
-      });
+            await AccountModel.update(
+              {
+                balance: paying.balance - value,
+              },
+              {
+                where: { id: req.userId },
+              }
+            );
 
+            await AccountModel.update(
+              {
+                balance: payed.balance + value,
+              },
+              {
+                where: { id: account.accountId },
+              }
+            );
 
-      return res.json(debited);
+            const answer = { transaction };
 
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: 'Falha ao encontrar o usuário!' });
+            return res.send(answer);
+          }
+
+          if (payment === "credit") {
+            const transaction = await TransactionModel.create({
+              creditedAccountId: account.accountId,
+              value: value,
+            });
+
+            await AccountModel.update(
+              {
+                balance: paying.balance - value,
+              },
+              {
+                where: { id: req.userId },
+              }
+            );
+
+            await AccountModel.update(
+              {
+                balance: payed.balance + value,
+              },
+              {
+                where: { id: account.accountId },
+              }
+            );
+
+            const answer = { transaction };
+
+            res.send(answer);
+          }
+        } catch (error) {
+          return res
+            .status(500)
+            .send({ message: 'Falha ao realizer transação!' });
+        }
+      } else {
+        res.send(
+          'Você não tem saldo o suficente para realizar essa transação!'
+        );
+      }
     }
-
   }
 }
 export default new TransactionController();

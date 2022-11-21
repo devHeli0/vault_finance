@@ -1,26 +1,20 @@
 import axios from 'axios';
 
-export const apiLink = axios.create({
+export const api = axios.create({
   baseURL: process.env.REACT_APP_API,
 });
 
-
 export const useApi = () => ({
-  validateToken: async (token: string) => {
-    const response = await apiLink.post('/account', { token });
+  validateToken: async (AcessToken: string) => {
+    const response = await api.post('/', { AcessToken });
     return response.data;
   },
-
   signIn: async (username: string, password: string) => {
-    const response = await apiLink.post('/', {
-      username,
-      password,
-    });
-    return response.data;
+    const answer = await api.post('/', { username, password });
+    return answer;
   },
-
   logout: async () => {
-    const response = await apiLink.post('/');
+    const response = await api.post('/logout');
     return response.data;
   },
 });

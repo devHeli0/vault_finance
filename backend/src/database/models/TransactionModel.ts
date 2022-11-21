@@ -5,13 +5,7 @@ import AccountModel from './AccountModel';
 
 interface TransactionModel extends ITransaction {}
 
-class TransactionModel extends Model {
-  static associate(models) {
-    TransactionModel.belongsTo(models.AccountModel, {
-      foreignKey: 'debitedAccountId' && 'creditedAccountId',
-    });
-  }
-}
+class TransactionModel extends Model {}
 
 TransactionModel.init(
   {
@@ -25,27 +19,43 @@ TransactionModel.init(
     debitedAccountId: {
       field: 'debitedAccountId',
       type: DataTypes.INTEGER,
-      unique: false,
+      unique: true,
+      allowNull: true,
+      validate: {
+        notEmpty: false,
+      },
     },
     creditedAccountId: {
       field: 'creditedAccountId',
       type: DataTypes.INTEGER,
-      unique: false,
+      unique: true,
+      allowNull: true,
+      validate: {
+        notEmpty: false,
+      },
     },
     value: {
       field: 'value',
       type: DataTypes.FLOAT,
-      allowNull: true,
+      allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     createdAt: {
-      field: 'created_at',
+      field: 'createdAt',
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
+      },
+    },
+    updatedAt: {
+      field: 'updatedAt',
+      type: DataTypes.DATE,
+      allowNull: true,
+      validate: {
+        notEmpty: false,
       },
     },
   },
@@ -58,9 +68,16 @@ TransactionModel.init(
 
 export default TransactionModel;
 
+// TransactionModel.belongsTo(AccountModel, {
+//   foreignKey: 'debitedAccountId'
+// });
+// TransactionModel.belongsTo(AccountModel, {
+//   foreignKey: 'creditedAccountId'
+// });
+
 // AccountModel.hasMany(TransactionModel, {
 //   foreignKey: { name: 'creditedAccountId' },
 // });
-// AccountModel.hasMany(TransactionModel, {
-//   foreignKey: { name: 'debitedAccountId' },
-// });
+//AccountModel.hasMany(TransactionModel, {
+//foreignKey: { name: 'debitedAccountId' },
+//});

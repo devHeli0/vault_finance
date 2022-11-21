@@ -1,39 +1,51 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CAuth } from '../../contexts/Auth/CAuth';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
 import { Layout } from '../../Layout';
-import { apiLink, useApi } from '../../hooks/useApi';
+import { api } from '../../hooks/useApi';
+import { AuthContext } from '../../contexts/Auth/AuthContext';
+import { SignatureKind } from 'typescript';
 
 const Login = () => {
-  const ctxt= useContext(CAuth);
+  const auth = useContext(AuthContext);
+
   const navigate = useNavigate();
-  const useapi = useApi();
+  const [user, setUser] = useState(null)
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (e: any) => {
+  // const handleLogin = async (e: any) => {
+  //   const data = { username, password };
+  //   const answer = await api.post('/', data);
+  //   answer && navigate('/account');
     
-
+  // };
+  const handleLogin = async (e:any) => {
     e.preventDefault();
-    const data = { username, password };
-    const answer = await useapi.signIn(username, password);
-    //lembre de dar uma alerta na janela pra user criado
-    window.alert(answer.data);
-    navigate('/account');
-    }
- 
+    if (username && password) {
+        const isLogged = await auth.signIn(username, password);
+        //const answer = await api.post('/', { username, password });
+        if (isLogged) {
+            alert(`Deu certo. ${isLogged}`);
+            navigate('/account')
+        } else {
+            alert(`Não deu certo.`);
+        }
+    }}
+
   return (
     <Layout>
-      <form className='form'>
+      <form className="form">
         <span className="header">
           <img src={logoNg} alt="" />
         </span>
         <span className="header-tittle"> Login </span>
         <div className="wrap-input">
           <input
-            className={username !== '' ? 'occupiedBox input' : 'input'}
+            className={
+              username !== '' ? 'occupiedBox input' : 'input'
+            }
             type="text"
             value={username}
             onChange={(e) => setusername(e.target.value)}
@@ -47,7 +59,9 @@ const Login = () => {
         </div>
         <div className="wrap-input">
           <input
-            className={password !== '' ? 'occupiedBox input' : 'input'}
+            className={
+              password !== '' ? 'occupiedBox input' : 'input'
+            }
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -74,6 +88,7 @@ const Login = () => {
       </form>
     </Layout>
   );
-}
+};
+
 
 export default Login;
