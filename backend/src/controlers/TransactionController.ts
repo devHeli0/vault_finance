@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
-import { mapValueFieldNames } from 'sequelize/types/utils';
 import AccountModel from '../database/models/AccountModel';
 import TransactionModel from '../database/models/TransactionModel';
 import UserModel from '../database/models/UserModel';
-var jwt = require('jsonwebtoken'); //import pode n reconherecer, teste antes de usar
+
 
 class TransactionController {
   public async cashout(
