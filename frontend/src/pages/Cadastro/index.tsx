@@ -3,13 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
 import { Layout } from '../../Layout';
-import { api } from '../../hooks/useApi';
-
+import { api } from '../../hooks/api';
 
 const Register = () => {
   //const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e: any) => {
@@ -17,7 +16,6 @@ const Register = () => {
     const data = { username, password };
     const answer = await api.post('/cadastro', data);
     window.alert(answer.data.message);
-    navigate('/');
   };
 
   return (
@@ -34,7 +32,7 @@ const Register = () => {
             }
             type="text"
             value={username}
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
             minLength={3}
           />

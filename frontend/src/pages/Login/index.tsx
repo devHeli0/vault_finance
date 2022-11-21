@@ -3,40 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
 import { Layout } from '../../Layout';
-import { api } from '../../hooks/useApi';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
-import { SignatureKind } from 'typescript';
+
 
 const Login = () => {
   const auth = useContext(AuthContext);
-
   const navigate = useNavigate();
-  const [user, setUser] = useState(null)
-  const [username, setusername] = useState('');
+
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const handleLogin = async (e: any) => {
-  //   const data = { username, password };
-  //   const answer = await api.post('/', data);
-  //   answer && navigate('/account');
-    
-  // };
   const handleLogin = async (e:any) => {
     e.preventDefault();
     if (username && password) {
-        const isLogged = await auth.signIn(username, password);
-        //const answer = await api.post('/', { username, password });
-        if (isLogged) {
-            alert(`Deu certo. ${isLogged}`);
-            navigate('/account')
+        const answer = await auth.signIn(username, password);
+        if (answer) {
+            alert(`Deu CERTO ${username} ${password}`);
+            return navigate('/account');
         } else {
-            alert(`Não deu certo.`);
+            alert("Não deu certo.");
         }
-    }}
+    }
+}
 
   return (
     <Layout>
-      <form className="form">
+      <form onSubmit={handleLogin} className="form">
         <span className="header">
           <img src={logoNg} alt="" />
         </span>
@@ -48,7 +40,7 @@ const Login = () => {
             }
             type="text"
             value={username}
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
             minLength={3}
           />
@@ -75,7 +67,11 @@ const Login = () => {
           ></span>
         </div>
         <div container-login-form-btn>
-          <button className="form-btn" onClick={handleLogin}>
+          <button
+            type="submit"
+            className="form-btn"
+            onClick={handleLogin}
+          >
             Login
           </button>
         </div>
@@ -89,6 +85,5 @@ const Login = () => {
     </Layout>
   );
 };
-
 
 export default Login;

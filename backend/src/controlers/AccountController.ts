@@ -7,7 +7,6 @@ class AccountController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-
     let user = await AccountModel.findByPk(req.userId);
 
     const answer = {

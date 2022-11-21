@@ -36,7 +36,7 @@ class UserController {
     const AcessToken = jwt.sign({id: user.id}, 'secret', {expiresIn: '24h'})
 
     const answer = {
-      username: user.username,
+      user: user.username,
       password: user.password,
       AcessToken: AcessToken
     };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useApi } from '../../hooks/useApi';
+import { useApi } from '../../hooks/api';
 import { User } from '../../types/User';
 import { AuthContext } from './AuthContext';
 
@@ -26,10 +26,10 @@ export const AuthProvider = ({
 
   const signIn = async (username: string, password: string) => {
     const answer = await api.signIn(username, password);
-    if (answer) {
-      setUser(answer.data);
-      setToken(answer.data.AcessToken);
-      return answer.data;
+    if (answer.user && answer.AcessToken) {
+      setUser(answer.user); //.user
+      setToken(answer.AcessToken); //.AcessToken
+      return true
     }
     return false;
   };

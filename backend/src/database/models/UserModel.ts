@@ -26,7 +26,7 @@ UserModel.init(
       type: DataTypes.STRING,
       unique: true,
       field: 'username',
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: false,
       },
@@ -34,7 +34,7 @@ UserModel.init(
     password: {
       type: DataTypes.STRING,
       field: 'password',
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: false,
       },
