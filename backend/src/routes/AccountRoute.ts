@@ -4,6 +4,6 @@ import AccountController from '../controlers/AccountController';
 
 const UserRoute = Router();
 
-UserRoute.post('/account', AuthMiddleware.authUserByToken, AccountController.getAccount);//
+UserRoute.get('/account', AuthMiddleware.authUserByToken, AccountController.getAccount);//
 
 export default UserRoute;

@@ -5,16 +5,29 @@ export const api = axios.create({
 });
 
 export const useApi = () => ({
-  validateToken: async (AcessToken: string) => {
-    const response = await api.post('/', { AcessToken });
-    return response.data.AcessToken;
+  validateToken: async () => {
+    const response = await api.get('/auth', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          'AccessToken'
+        )}`,
+      },
+    });
+    return response;
   },
   signIn: async (username: string, password: string) => {
+    console.log('#SIGINHOOKS');
     const answer = await api.post('/', { username, password });
     return answer.data;
   },
-  logout: async () => {
-    const response = await api.post('/logout');
+  resume: async () => {
+    const response = await api.get('/account', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          'AccessToken'
+        )}`,
+      },
+    });
     return response;
   },
 });

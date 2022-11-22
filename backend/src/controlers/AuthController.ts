@@ -1,14 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
+import UserModel from '../database/models/UserModel';
 var jwt = require('jsonwebtoken');
 
-class AuthMiddleware {
-  public authUserByToken(
+class AuthController {
+  public async getAccount(
     req: Request,
     res: Response,
     next: NextFunction
-  ) {
-    console.log('###MIDDDLLEEWAAAREEEEE');
+  ): Promise<Response | void> {
+    console.log('###TOKEN');
     const { authorization } = req.headers;
+
+    console.log(authorization);
 
     if (!authorization)
       return res.status(401).json({ message: 'Acesso restrito!' });
@@ -18,16 +21,20 @@ class AuthMiddleware {
     try {
       const decoded = jwt.verify(token, 'secret');
 
-      const { id, user } = decoded; //eu sei que tem id e user, em algum momento preciso do user
+      let user = await UserModel.findOne({
+        where: { id: decoded.id },
+      });
 
-      req.userId = id;
-      req.userName = user;
-
-      return next();
+      if (user) {
+        res.status(200).send();
+      } else {
+        res.status(409).send();
+      }
+      next();
+      return;
     } catch {
       return res.status(401).json({ mensagem: 'Token inválido!' });
     }
   }
 }
-
-export default new AuthMiddleware();
+export default new AuthController();

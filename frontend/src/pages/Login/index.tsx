@@ -5,7 +5,6 @@ import '../../styles/index.css';
 import { Layout } from '../../Layout';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 
-
 const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -13,22 +12,24 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (e:any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
+    console.log('CLICK');
     if (username && password) {
-        const answer = await auth.signIn(username, password);
-        if (answer) {
-            alert(`Deu CERTO ${username} ${password}`);
-            return navigate('/account');
-        } else {
-            alert("Não deu certo.");
-        }
+      console.log({ auth, username, password });
+      const answer = await auth.signIn(username, password);
+      if (answer) {
+        alert(`Deu CERTO ${username} ${password}`);
+        return navigate('/account');
+      } else {
+        alert('Não deu certo.');
+      }
     }
-}
+  };
 
   return (
     <Layout>
-      <form onSubmit={handleLogin} className="form">
+      <form className="form" onSubmit={handleLogin}>
         <span className="header">
           <img src={logoNg} alt="" />
         </span>
@@ -66,15 +67,12 @@ const Login = () => {
             data-placeholder="password"
           ></span>
         </div>
-        <div container-login-form-btn>
           <button
             type="submit"
             className="form-btn"
-            onClick={handleLogin}
           >
             Login
           </button>
-        </div>
         <div className="text-center">
           <span className="txt1">Ainda não tem um conta?</span>
           <Link className="txt2" to="/cadastro">

@@ -1,13 +1,18 @@
-import { useContext } from "react";
-import  Login from "../../pages/Login";
-import { AuthContext } from "./AuthContext";
-
-export const RequireAuth = ({ children }: { children: JSX.Element }) => {
-
-    const auth = useContext(AuthContext);
-
-    if (!auth.user) {
-        return <Login />;
-    }
-    return children;
-}
+import { useContext, useEffect } from 'react';
+import { AuthContext } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
+export const RequireAuth = ({
+  children,
+}: {
+  children: JSX.Element;
+}) => {
+  const navigate = useNavigate()
+  const auth = useContext(AuthContext);
+  useEffect(() => {
+    console.log(auth)
+  }, [auth]);
+  if (!auth.user) {
+    navigate ('/');
+  }
+  return children;
+};

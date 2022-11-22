@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/api';
 import { User } from '../../types/User';
 import { AuthContext } from './AuthContext';
+import routes from '../../routes/routes';
 
 export const AuthProvider = ({
   children,
@@ -9,44 +11,55 @@ export const AuthProvider = ({
   children: JSX.Element;
 }) => {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
   const api = useApi();
+  const location = useLocation();
 
   useEffect(() => {
+    console.log('###USEEFFECT');
+    console.log('#LOCATION', location);
+    const AccessToken = localStorage.getItem('AccessToken');
     const validateToken = async () => {
-      const storageData = localStorage.getItem('AcessToken');
-      if (storageData) {
-        const data = await api.validateToken(storageData);
-        if (data.user) {
-          setUser(data.user);
-        }
+      console.log('###VALIDATETOKEN');
+      if (AccessToken) {
+        console.log('###AccessToken', AccessToken);
+        const data = await api.validateToken();
+        console.log('#APIRETURN', data);
+        if (!data) navigate('/');
+      } else {
+        alert('Acesso restrito! Usuário não logado.');
+        navigate('/');
       }
     };
-    validateToken();
-  }, [api]);
+    if (routes.privates.includes(location.pathname)) {
+      validateToken();
+    }
+  }, [location.pathname]);
 
   const signIn = async (username: string, password: string) => {
+    alert('###SIGNIN');
     const answer = await api.signIn(username, password);
-    if (answer.user && answer.AcessToken) {
+    if (answer.user && answer.AccessToken) {
       setUser(answer.user); //.user
-      setToken(answer.AcessToken); //.AcessToken
-      return true
+      setToken(answer.AccessToken); //.AccessToken
+      return true;
     }
     return false;
   };
 
-  const signout = async () => {
-    console.log('signout está sendo executada.');
+  const signOut = async () => {
+    alert('Saindo...');
     setUser(null);
     setToken('');
-    await api.logout();
+    localStorage.clear();
   };
 
-  const setToken = (AcessToken: string) => {
-    localStorage.setItem('AcessToken', AcessToken);
+  const setToken = (AccessToken: string) => {
+    localStorage.setItem('AccessToken', AccessToken);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signout }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

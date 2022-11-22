@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/cadastro" element={<Register />} />
-        <Route path="/private" element={<Account />} /> 
+        <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
       </Routes>
     </div>
   );

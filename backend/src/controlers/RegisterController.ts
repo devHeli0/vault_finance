@@ -10,7 +10,7 @@ class RegisterController {
     res: Response
   ): Promise<Response> {
     const { username, password } = req.body;
-
+    console.log('###register')
     if (password.length < 8)
       return res
         .status(400)

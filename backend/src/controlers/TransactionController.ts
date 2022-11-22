@@ -3,7 +3,6 @@ import AccountModel from '../database/models/AccountModel';
 import TransactionModel from '../database/models/TransactionModel';
 import UserModel from '../database/models/UserModel';
 
-
 class TransactionController {
   public async cashout(
     req: Request,
@@ -19,12 +18,12 @@ class TransactionController {
     let paying = await AccountModel.findByPk(req.userId);
     let payed = await AccountModel.findByPk(account.accountId);
 
-    if (payment !== "debit" && payment !== "credit") {
-       res.json('Selecione uma opção de pagamento')
+    if (payment !== 'debit' && payment !== 'credit') {
+      res.json('Selecione uma opção de pagamento');
     } else {
       if (paying.balance >= value) {
         try {
-          if (payment == "debit") {
+          if (payment == 'debit') {
             const transaction = await TransactionModel.create({
               debitedAccountId: account.accountId,
               value: value,
@@ -53,7 +52,7 @@ class TransactionController {
             return res.send(answer);
           }
 
-          if (payment === "credit") {
+          if (payment === 'credit') {
             const transaction = await TransactionModel.create({
               creditedAccountId: account.accountId,
               value: value,
