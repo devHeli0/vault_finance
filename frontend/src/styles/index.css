@@ -2,10 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body,
-html {
   font-family: sans-serif;
 }
 
@@ -18,14 +14,14 @@ html {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrapper;
   align-items: center;
   justify-content: center;
   padding: 15px;
   background-color: #111;
 }
 
-.wrap {
+.wrapper {
   width: 390px;
   background-color: #333;
   border-radius: 10px;
@@ -39,22 +35,22 @@ html {
 }
 
 .header img {
-    display: flex;
-    margin-top: -60px;
-    padding-left: 65px;
-    padding-bottom: 10px;
+  display: flex;
+  margin-top: -60px;
+  padding-left: 65px;
+  padding-bottom: 10px;
 }
 
 .header-tittle {
-    font-family: sans-serif;
-    display: block;
-    font-size: 30px;
-    color: azure;
-    line-height: 1.2;
-    text-align: center;
-  }
+  font-family: sans-serif;
+  display: block;
+  font-size: 30px;
+  color: azure;
+  line-height: 1.2;
+  text-align: center;
+}
 
-.wrap-input {
+.wrapper-input {
   width: 100%;
   position: relative;
   border-bottom: 2px solid #adadad;
@@ -128,7 +124,7 @@ html {
 }
 
 .input:focus + .focus-input::after {
-  top: -15px;
+  top: -13px;
 }
 
 .input:focus + .focus-input::before {
@@ -136,21 +132,21 @@ html {
 }
 
 .occupiedBox + .focus-input::after {
-  top: -15px;
+  top: -13px;
 }
 
 .occupiedBox + .focus-input::before {
   width: 100%;
 }
 
-.container-login-btn {
+.container-btn {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrapper;
   justify-content: center;
   padding-bottom: 13px;
 }
 
-.form-btn {
+.btn {
   font-size: 15px;
   border: none;
   border-radius: 10px;
@@ -169,11 +165,11 @@ html {
   background: linear-gradient(to left, #21d4fd, #b721ff);
 }
 
-.form-btn:hover {
+.btn:hover {
   cursor: pointer;
 }
 
-.text-center {
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,14 +190,14 @@ html {
 }
 
 .txt2:hover {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .txt3 {
-    font-size: 14px;
-    color: rgba(53, 221, 213, 0.473);
-    line-height: 1;
-    display: block;
-    margin-top: 20px;
-    margin-bottom: -20px;
+  font-size: 14px;
+  color: rgba(53, 221, 213, 0.473);
+  line-height: 1;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: -20px;
 }

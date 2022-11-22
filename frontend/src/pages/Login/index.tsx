@@ -33,7 +33,7 @@ const Login = () => {
           <img src={logoNg} alt="" />
         </span>
         <span className="header-tittle"> Login </span>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={
               username !== '' ? 'occupiedBox input' : 'input'
@@ -49,7 +49,7 @@ const Login = () => {
             data-placeholder="username"
           ></span>
         </div>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={
               password !== '' ? 'occupiedBox input' : 'input'
@@ -66,10 +66,10 @@ const Login = () => {
             data-placeholder="password"
           ></span>
         </div>
-        <button type="submit" className="form-btn">
+        <button type="submit" className="btn">
           Login
         </button>
-        <div className="text-center">
+        <div className="flex-center">
           <span className="txt1">Ainda não tem um conta?</span>
           <Link className="txt2" to="/cadastro">
             Cadastre-se

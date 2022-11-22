@@ -27,7 +27,7 @@ const Register = () => {
           <img src={logoNg} alt="" />
         </span>
         <span className="header-tittle"> Cadastro </span>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={
               username !== '' ? 'occupiedBox input' : 'input'
@@ -43,7 +43,7 @@ const Register = () => {
             data-placeholder="@username"
           ></span>
         </div>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={
               password !== '' ? 'occupiedBox input' : 'input'
@@ -60,10 +60,10 @@ const Register = () => {
             data-placeholder="password"
           ></span>
         </div>
-        <div container-login-form-btn>
+        <div container-btn>
           <button
             type="submit"
-            className="form-btn"
+            className="btn"
             onClick={handleRegister}
           >
             Cadastrar
@@ -75,7 +75,7 @@ const Register = () => {
         <span className="txt3">
           *password deve conter no mínimo 3 caracteres
         </span>
-        <div className="text-center">
+        <div className="flex-center">
           <span className="txt1">Já tem uma conta?</span>
           <Link className="txt2" to="/">
             Faça o Login!

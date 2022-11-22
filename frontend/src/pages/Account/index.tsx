@@ -30,7 +30,10 @@ const Account = () => {
     console.log('####TRANSAÇÂo');
     e.preventDefault();
     const data = { username, value };
-    const answer = await Api.transaction(data.username,Number(data.value));
+    const answer = await Api.transaction(
+      data.username,
+      Number(data.value)
+    );
     if (answer) {
       console.log('####TRANSAÇÂo');
       window.alert('transação realizada com sucesso!');
@@ -44,7 +47,7 @@ const Account = () => {
           Account #{data.account}
           <div>R$ {data.balance}</div>
         </span>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={
               username !== '' ? 'occupiedBox input' : 'input'
@@ -57,7 +60,7 @@ const Account = () => {
           />
           <span className="focus-input" data-placeholder="@"></span>
         </div>
-        <div className="wrap-input">
+        <div className="wrapper-input">
           <input
             className={value !== '' ? 'occupiedBox input' : 'input'}
             type="number"
@@ -68,16 +71,16 @@ const Account = () => {
           />
           <span className="focus-input" data-placeholder="R$"></span>
         </div>
-        <button type="submit" className="form-btn">
+        <button type="submit" className="btn">
           Enviar pagamento
         </button>
-        <div className="text-center">
-          <Link className="form-btn" to="/transactions">
+        <div className="flex-center">
+          <Link className="btn" to="/transactions">
             Lista de transações
           </Link>
         </div>
-        <div className="text-center">
-          <Link className="form-btn" onClick={handleLogout} to={''}>
+        <div className="flex-center">
+          <Link className="btn" onClick={handleLogout} to={''}>
             Sair
           </Link>
         </div>
