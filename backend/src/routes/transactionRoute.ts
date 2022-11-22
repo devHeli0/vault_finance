@@ -2,12 +2,12 @@ import { Router } from 'express';
 import TransactionController from '../controlers/TransactionController';
 import AuthMiddleware from '../middlewares/AuthMiddleware';
 
-const transactionRoute = Router();
+const TransactionRoute = Router();
 
-transactionRoute.post(
+TransactionRoute.get(
   '/transaction',
   AuthMiddleware.authUserByToken,
   TransactionController.cashout
 );
 
-export default transactionRoute;
+export default TransactionRoute;

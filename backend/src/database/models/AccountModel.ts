@@ -10,9 +10,6 @@ class AccountModel extends Model {
       foreignKey: 'id',
     });
 
-    AccountModel.hasMany(models.TransactionModel, {
-      foreignKey: 'debitedAccountId' || 'creditedAccountId',
-    });
   }
 }
 
@@ -24,6 +21,10 @@ AccountModel.init(
       unique: true,
       autoIncrement: true,
       primaryKey: true,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
     },
     balance: {
       type: DataTypes.FLOAT,

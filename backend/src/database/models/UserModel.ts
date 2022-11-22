@@ -26,15 +26,15 @@ UserModel.init(
       type: DataTypes.STRING,
       unique: true,
       field: 'username',
-      allowNull: true,
+      allowNull: false,
       validate: {
-        notEmpty: false,
+        notEmpty: true,
       },
     },
     password: {
       type: DataTypes.STRING,
       field: 'password',
-      allowNull: true,
+      allowNull: false,
       validate: {
         notEmpty: false,
       },
@@ -42,7 +42,11 @@ UserModel.init(
     accountId: {
       type: DataTypes.INTEGER,
       unique: true,
-    },
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    }, 
   },
   {
     tableName: 'Users',

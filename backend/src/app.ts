@@ -1,10 +1,11 @@
 import express from 'express';
-import AccountRoute from './routes/AccountRoute';
-import RegisterRoute from './routes/RegisterRoute';
-import transactionRoute from './routes/transactionRoute';
-import UserRoute from './routes/UserRoute';
 import cors from 'cors';
+import RegisterRoute from './routes/RegisterRoute';
+import UserRoute from './routes/UserRoute';
+import AccountRoute from './routes/AccountRoute';
+import TransactionRoute from './routes/transactionRoute';
 import AuthRoute from './routes/AuthRoute';
+
 
 require('dotenv').config();
 
@@ -29,7 +30,7 @@ export class App {
     this.express.use('/', RegisterRoute);
     this.express.use('/', UserRoute);
     this.express.use('/', AccountRoute);
-    this.express.use('/', transactionRoute);
+    this.express.use('/', TransactionRoute);
     this.express.use('/', AuthRoute);
     this.express.use((err, req, res, next) => {
       console.error(err.stack);
