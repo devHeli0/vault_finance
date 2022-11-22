@@ -8,7 +8,7 @@ class TransactionController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    const { username, value } = req.body;
+    const { username, value } = req.params;
 
     const account = await UserModel.findOne({
       where: { username },
@@ -22,7 +22,7 @@ class TransactionController {
       if (debitedId.id === creditedId.id) {
         return res.send('Selecione um usuário válido');
       } else {
-        if (debitedId.balance >= value) {
+        if (debitedId.balance >= Number(value)) {
           const transaction = await TransactionModel.create({
             debitedAccountId: debitedId.id,
             creditedAccountId: account.accountId,
@@ -31,7 +31,7 @@ class TransactionController {
 
           await AccountModel.update(
             {
-              balance: debitedId.balance - value,
+              balance: debitedId.balance - Number(value),
             },
             {
               where: { id: req.userId },
@@ -40,27 +40,22 @@ class TransactionController {
 
           await AccountModel.update(
             {
-              balance: creditedId.balance + value,
+              balance: creditedId.balance + Number(value),
             },
             {
               where: { id: account.accountId },
             }
           );
 
-          let transactions = await TransactionModel.findAll({
-            where: { debitedAccountId: req.userId },
-            attributes: [
-              'id',
-              'debitedAccountId',
-              'creditedAccountId',
-              'value',
-              'createdAt',
-            ],
-          });
-
-          const answer = { transaction, transactions };
-          
-          return res.send(answer);
+          if (transaction) {
+            res.send('Transação realizada com sucesso!');
+            return;
+          }
+        } else {
+          res.send(
+            'Você não tem saldo o suficente para realizar essa transação!'
+          );
+          return;
         }
       }
     } catch (error) {
@@ -69,8 +64,28 @@ class TransactionController {
         .send({ message: 'Falha ao realizer transação!' });
     }
   }
-  // res.send(
-  //   'Você não tem saldo o suficente para realizar essa transação!'
-  // )
+  public async transactionList(
+    req: Request,
+    res: Response
+  ): Promise<Response | void> {
+    try {
+      let transactions = await TransactionModel.findAll({
+        where: { debitedAccountId: req.userId },
+        attributes: [
+          'id',
+          'debitedAccountId',
+          'creditedAccountId',
+          'value',
+          'createdAt',
+        ],
+      });
+      res.send(transactions);
+    } catch (error) {
+      res.status(500).send({
+        message: 'Falha ao renderizar lista de transações!',
+      });
+      return;
+    }
+  }
 }
 export default new TransactionController();

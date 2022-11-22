@@ -30,7 +30,7 @@ const Account = () => {
     console.log('####TRANSAÇÂo');
     e.preventDefault();
     const data = { username, value };
-    const answer = await api.get('/transaction', { data });
+    const answer = await Api.transaction(data.username,Number(data.value));
     if (answer) {
       console.log('####TRANSAÇÂo');
       window.alert('transação realizada com sucesso!');
@@ -60,7 +60,7 @@ const Account = () => {
         <div className="wrap-input">
           <input
             className={value !== '' ? 'occupiedBox input' : 'input'}
-            type="text"
+            type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             required

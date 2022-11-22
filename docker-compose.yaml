@@ -2,7 +2,7 @@ version: "4.14.0"
 
 services:
   backend:
-    container_name: "backend"
+    container_name: "ng_backend"
     build: ./back-end
     ports:
       - 3001:3001
@@ -14,18 +14,10 @@ services:
       - DB_PASS=123456
       - DB_HOST=db
       - DB_NAME=EMAIL
-    healthcheck:
-      test: [ "CMD", "lsof", "-i", ":3001" ]
-      timeout: 10s
-      retries: 5
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: always
 
   frontend:
-    container_name: "app_frontend"
-    build: ./front-end
+    container_name: "ng_frontend"
+    build: ./backend:/NG_APP/backend
     ports:
       - 3000:3000
     environment:

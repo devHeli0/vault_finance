@@ -37,7 +37,7 @@ export const AuthProvider = ({
   }, [location.pathname]);
 
   const signIn = async (username: string, password: string) => {
-    alert('###SIGNIN');
+    alert('Entrando...');
     const answer = await api.signIn(username, password);
     if (answer.user && answer.AccessToken) {
       setUser(answer.user); //.user

@@ -9,16 +9,23 @@ class AccountController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    //answer padrão
-    let user = await UserModel.findOne({ where: { id: req.userId } });
-    let account = await AccountModel.findByPk(user.accountId);
+    try {
+      let user = await UserModel.findOne({
+        where: { id: req.userId },
+      });
+      let account = await AccountModel.findByPk(user.accountId);
 
-    const answer = {
-      account: account.id,
-      balance: account.balance,
-    };
-    res.send(answer);
-    return;
+      const answer = {
+        account: account.id,
+        balance: account.balance,
+      };
+      res.send(answer);
+      return;
+    } catch (error) {
+      const answer = 'Falha ao renderizar Account! Tente novamente';
+      res.status(400).send(answer);
+      return;
+    }
   }
 }
 export default new AccountController();

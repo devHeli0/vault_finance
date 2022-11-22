@@ -10,37 +10,43 @@ class RegisterController {
     res: Response
   ): Promise<Response> {
     const { username, password } = req.body;
-    console.log('###register')
-    if (password.length < 8)
-      return res
-        .status(400)
-        .send('Senha deve ter ao menos 8 caracteres!');
 
-    let user = await UserModel.findOne({
-      where: { username },
-    });
-
-    if (user) {
-      //return res.status(400).send('Usuário já existe!');
-      return res.json('Usuário já existe!')
-    } else {
-      const account = await AccountModel.create();
-
-      user = await UserModel.create({
-        username,
-        password: await bcrypt.hash(password, 8),
-        accountId: account.id,
+    try {
+      let user = await UserModel.findOne({
+        where: { username },
       });
 
-      const answer = {
-        message: 'Usuário cadastrado com sucesso!',
-        //id: user.id,
-        //username: user.username,
-        //balance: account.balance,
-      };
+      if (user) {
+        return res.json('Usuário já existe!');
+      } else {
+        const account = await AccountModel.create();
+        if (password.length < 8 || username.length < 3) {
+          const answer = {
+            message: 'Username ou Senha inválidos!',
+          };
+          res.send(answer);
+          return;
+        }
+        user = await UserModel.create({
+          username,
+          password: await bcrypt.hash(password, 8),
+          accountId: account.id,
+        });
 
-      return res.json(answer);
+        const answer = {
+          message: 'Usuário cadastrado com sucesso!',
+        };
+        res.send(answer);
+        return;
+      }
+    } catch (error) {
+      const answer = {
+        message: 'Falha ao cadastrar usuário, tente novamente!',
+      };
+      res.status(400).send(answer);
+      return;
     }
   }
 }
+
 export default new RegisterController();

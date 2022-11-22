@@ -30,4 +30,15 @@ export const useApi = () => ({
     });
     return response;
   },
+  transaction: async (username: string, value: number) => {
+    const response = await api.get('/transaction', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          'AccessToken'
+        )}`,
+      },
+      params: { username, value },
+    });
+    return response;
+  },
 });
