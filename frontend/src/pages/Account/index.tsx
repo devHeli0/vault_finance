@@ -1,11 +1,12 @@
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { useApi } from '../../hooks/api';
+import { Layout } from '../../Layout';
 
 const Account = () => {
   const auth = useContext(AuthContext);
-  const [data, setData] = useState({ id: '', balance: '' });
+  const [data, setData] = useState({ account: '', balance: '' });
   const api = useApi();
   const navigate = useNavigate();
 
@@ -24,11 +25,25 @@ const Account = () => {
   };
 
   return (
-    <div className="wrap">
-      <h2>Página Fechada</h2>
-      <div>{data.balance}</div>
-      {<button onClick={handleLogout}>Sair</button>}
-    </div>
+    <Layout>
+      <div className="form">
+        <span className="header-tittle">
+          Account #{data.account}{' '}
+        </span>
+        <span className="header-tittle"> R$ {data.balance} </span>
+        <div className="text-center">
+          <Link className="form-btn" to="/">
+            Realizar transação
+          </Link>
+        </div>
+        <div className="text-center">
+          <Link onClick={handleLogout} className="txt3" to="">
+            Logout
+          </Link>
+        </div>
+      </div>
+      /
+    </Layout>
   );
 };
 

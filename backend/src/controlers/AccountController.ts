@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import AccountModel from '../database/models/AccountModel';
 import TransactionModel from '../database/models/TransactionModel';
 import UserModel from '../database/models/UserModel';
@@ -13,16 +13,24 @@ class AccountController {
     let user = await UserModel.findOne({ where: { id: req.userId } });
     let account = await AccountModel.findByPk(user.accountId);
 
-    await TransactionModel.findAll({
-      where: { id: req.userId },
+    let transactions = await TransactionModel.findAll({
+      where: { debitedAccountId: req.userId },
+      attributes: [
+        'id',
+        'debitedAccountId',
+        'creditedAccountId',
+        'value',
+        'createdAt',
+      ],
     });
 
     const answer = {
+      transactions,
       account: account.id,
       balance: account.balance,
     };
-
-    return res.json(answer);
+    res.send(answer);
+    return;
   }
 }
 export default new AccountController();

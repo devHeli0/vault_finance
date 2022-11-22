@@ -20,18 +20,18 @@ TransactionModel.init(
       field: 'debitedAccountId',
       type: DataTypes.INTEGER,
       unique: true,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        notEmpty: false,
+        notEmpty: true,
       },
     },
     creditedAccountId: {
       field: 'creditedAccountId',
       type: DataTypes.INTEGER,
       unique: true,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        notEmpty: false,
+        notEmpty: true,
       },
     },
     value: {

@@ -1,4 +1,4 @@
 export default {
-  privates: ['/account'],
+  privates: ['/account','/transactions'],
   publics: ['/', '/cadastro'],
 };
