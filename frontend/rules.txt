@@ -1,15 +1,10 @@
-1. saber qeu tem um user logado;
-2. Se tiver logado, tem que ter token;
-3. Se tiver token libera o acesso as demais funcionalidades.
 
-
-Login: 
-1. Receba os dados de login;
-2. Envia uma requisição para o BACKEND validar no banco de dados;
-3. Estando corretom, salva-se alguma referência ao usuário no browser;
+Login: <Token></Token>
+1. Receba os dados de login, valide e encaminhe pra próxima página. 
+2. LocalStorage
 4. Errado, avisa que ta errado. 
 
 Deslogar: 
 1. Apago a referência que existir no brower;
-1.1. Enviar uma requisição ao BACKEND avisando para destruir aquela referência;
-2. Atualizo a página. 
+Backend precisa destruir a referência?
+2. Att  
