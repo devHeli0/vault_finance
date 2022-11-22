@@ -2,6 +2,10 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules.tar.gz
+/build
+.env
+/.nyc_output
 
 # testing
 /coverage

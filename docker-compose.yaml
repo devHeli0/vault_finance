@@ -10,10 +10,10 @@ services:
       - ./backend:/NG_APP/backend
     environment:
       - PORT=3001
-      - DB_USER=root
-      - DB_PASS=123456
+      - DB_USER=postgres
+      - DB_PASS=admin
       - DB_HOST=db
-      - DB_NAME=EMAIL
+      - DB_NAME=NGAPP
 
   frontend:
     container_name: "ng_frontend"
@@ -21,11 +21,11 @@ services:
     ports:
       - 3000:3000
     environment:
-      - REACT_APP_HOST=http://34.195.58.149:3001
+      - REACT_APP_HOST=http://localhost:3000
 
   database:
     image: postgress
-    container_name: "postgres_db"
+    container_name: "ng_postgres_db"
     restart: "always"
     ports:
       - 5432:5432
