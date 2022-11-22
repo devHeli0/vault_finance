@@ -1,0 +1,49 @@
+version: "4.14.0"
+
+services:
+  backend:
+    container_name: "backend"
+    build: ./back-end
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend:/NG_APP/backend
+    environment:
+      - PORT=3001
+      - DB_USER=root
+      - DB_PASS=123456
+      - DB_HOST=db
+      - DB_NAME=EMAIL
+    healthcheck:
+      test: [ "CMD", "lsof", "-i", ":3001" ]
+      timeout: 10s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  frontend:
+    container_name: "app_frontend"
+    build: ./front-end
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_HOST=http://34.195.58.149:3001
+
+  database:
+    image: postgress
+    container_name: "postgres_db"
+    restart: "always"
+    ports:
+      - 5432:5432
+    environment:
+      - DB_USER = "postgres"
+      - DB_PASS = "admin"
+      - DB_NAME = "NGAPP"
+    volume: 
+      - pgdata/:data/postgres
+
+volumes:
+  pgdata:
+    driver: local

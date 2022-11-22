@@ -1,0 +1,8 @@
+{
+  "name": "ngapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Helio-scNeto/NG_APP.git",
+  "author": "Hélio Neto <hdsn211@gmail.com>",
+  "license": "MIT"
+}

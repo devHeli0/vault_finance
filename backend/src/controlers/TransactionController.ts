@@ -47,7 +47,19 @@ class TransactionController {
             }
           );
 
-          const answer = {transaction};
+          let transactions = await TransactionModel.findAll({
+            where: { debitedAccountId: req.userId },
+            attributes: [
+              'id',
+              'debitedAccountId',
+              'creditedAccountId',
+              'value',
+              'createdAt',
+            ],
+          });
+
+          const answer = { transaction, transactions };
+          
           return res.send(answer);
         }
       }

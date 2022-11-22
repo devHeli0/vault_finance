@@ -5,8 +5,13 @@ import AccountModel from './AccountModel';
 
 interface TransactionModel extends ITransaction {}
 
-class TransactionModel extends Model {}
-
+class TransactionModel extends Model {
+  static associate(models) {
+    TransactionModel.belongsTo(models.AccountModel, {
+      foreignKey: 'debitedAccountId' && 'creditedAccountId',
+    });
+  }
+}
 TransactionModel.init(
   {
     id: {

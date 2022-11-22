@@ -15,7 +15,9 @@ const Register = () => {
     e.preventDefault();
     const data = { username, password };
     const answer = await api.post('/cadastro', data);
-    window.alert(answer.data.message);
+    if (answer) {
+      window.alert(answer.data.message);
+    }
   };
 
   return (
@@ -38,7 +40,7 @@ const Register = () => {
           />
           <span
             className="focus-input"
-            data-placeholder="username"
+            data-placeholder="@username"
           ></span>
         </div>
         <div className="wrap-input">

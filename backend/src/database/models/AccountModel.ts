@@ -9,7 +9,9 @@ class AccountModel extends Model {
     AccountModel.belongsTo(models.UserModel, {
       foreignKey: 'id',
     });
-
+    AccountModel.hasMany(models.TransactionModel, {
+      foreignKey: 'debitedAccountId' && 'creditedAccountId',
+    });
   }
 }
 

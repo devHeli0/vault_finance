@@ -14,15 +14,14 @@ const Login = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    console.log('CLICK');
     if (username && password) {
       console.log({ auth, username, password });
       const answer = await auth.signIn(username, password);
       if (answer) {
-        alert(`Deu CERTO ${username} ${password}`);
+        alert(`Entrando...`);
         return navigate('/account');
       } else {
-        alert('Não deu certo.');
+        alert('Erro ao realizar login, tente novamente!');
       }
     }
   };
@@ -67,12 +66,9 @@ const Login = () => {
             data-placeholder="password"
           ></span>
         </div>
-          <button
-            type="submit"
-            className="form-btn"
-          >
-            Login
-          </button>
+        <button type="submit" className="form-btn">
+          Login
+        </button>
         <div className="text-center">
           <span className="txt1">Ainda não tem um conta?</span>
           <Link className="txt2" to="/cadastro">

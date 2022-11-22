@@ -18,11 +18,11 @@ module.exports = {
         validate: {
           notEmpty: false,
         },
-        // refereces: {
-        //   model: 'Accounts',
-        //   key: 'id',
-        //   as: 'accountId'
-        // },
+        refereces: {
+          model: 'Accounts',
+          key: 'id',
+          as: 'debitedAccountId'
+        },
       },
       creditedAccountId: {
         field: 'creditedAccountId',
@@ -31,11 +31,11 @@ module.exports = {
         validate: {
           notEmpty: false,
         },
-        // refereces: {
-        //   model: 'Accounts',
-        //   key: 'id',
-        //   as: 'accountId'
-        // },
+        refereces: {
+          model: 'Accounts',
+          key: 'id',
+          as: 'creditedAccountI'
+        },
       },
       value: {
         field: 'value',

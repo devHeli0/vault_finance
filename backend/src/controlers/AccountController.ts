@@ -13,19 +13,7 @@ class AccountController {
     let user = await UserModel.findOne({ where: { id: req.userId } });
     let account = await AccountModel.findByPk(user.accountId);
 
-    let transactions = await TransactionModel.findAll({
-      where: { debitedAccountId: req.userId },
-      attributes: [
-        'id',
-        'debitedAccountId',
-        'creditedAccountId',
-        'value',
-        'createdAt',
-      ],
-    });
-
     const answer = {
-      transactions,
       account: account.id,
       balance: account.balance,
     };
