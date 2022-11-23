@@ -27,16 +27,11 @@ const Account = () => {
   };
 
   const Pay = async (e: any) => {
-    console.log('####TRANSAÇÂo');
     e.preventDefault();
-    const data = { username, value };
-    const answer = await Api.transaction(
-      data.username,
-      Number(data.value)
-    );
-    if (answer) {
-      console.log('####TRANSAÇÂo');
-      window.alert('transação realizada com sucesso!');
+    if (username && value) {
+      const answer = await Api.transaction(username, Number(value));
+      console.log(answer.data);
+      window.alert(answer.data);
     }
   };
 

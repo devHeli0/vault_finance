@@ -4,10 +4,18 @@ import AuthMiddleware from '../middlewares/AuthMiddleware';
 
 const TransactionRoute = Router();
 
-TransactionRoute.get(
+TransactionRoute.post(
   '/transaction',
   AuthMiddleware.authUserByToken,
   TransactionController.cashout
 );
+
+TransactionRoute.get(
+  '/transaction',
+  AuthMiddleware.authUserByToken,
+  TransactionController.transactionList
+);
+
+
 
 export default TransactionRoute;

@@ -8,7 +8,8 @@ class TransactionController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    const { username, value } = req.params;
+    console.log('###RECEBIOSNOMES')
+    const { username, value } = req.body;
 
     const account = await UserModel.findOne({
       where: { username },
@@ -22,7 +23,7 @@ class TransactionController {
       if (debitedId.id === creditedId.id) {
         return res.send('Selecione um usuário válido');
       } else {
-        if (debitedId.balance >= Number(value)) {
+        if (debitedId.balance >= value) {
           const transaction = await TransactionModel.create({
             debitedAccountId: debitedId.id,
             creditedAccountId: account.accountId,
@@ -31,7 +32,7 @@ class TransactionController {
 
           await AccountModel.update(
             {
-              balance: debitedId.balance - Number(value),
+              balance: debitedId.balance - value,
             },
             {
               where: { id: req.userId },
@@ -40,7 +41,7 @@ class TransactionController {
 
           await AccountModel.update(
             {
-              balance: creditedId.balance + Number(value),
+              balance: creditedId.balance + value,
             },
             {
               where: { id: account.accountId },
@@ -79,7 +80,11 @@ class TransactionController {
           'createdAt',
         ],
       });
-      res.send(transactions);
+
+      const answer= {transactions}
+
+      res.send(answer);
+
     } catch (error) {
       res.status(500).send({
         message: 'Falha ao renderizar lista de transações!',

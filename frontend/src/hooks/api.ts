@@ -16,7 +16,6 @@ export const useApi = () => ({
     return response;
   },
   signIn: async (username: string, password: string) => {
-    console.log('#SIGINHOOKS');
     const answer = await api.post('/', { username, password });
     return answer.data;
   },
@@ -31,13 +30,22 @@ export const useApi = () => ({
     return response;
   },
   transaction: async (username: string, value: number) => {
+    const response = await api.post('/transaction',{username, value}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          'AccessToken'
+        )}`,
+      },
+    });
+    return response;
+  },
+  transactionList: async () => {
     const response = await api.get('/transaction', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           'AccessToken'
         )}`,
       },
-      params: { username, value },
     });
     return response;
   },

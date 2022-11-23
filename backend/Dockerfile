@@ -2,13 +2,15 @@ FROM node:16-alpine
 
 WORKDIR /NG_APP/backend
 
-COPY package.json /NG_APP/backend
+RUN apk add --no-cache make gcc g++ bash python3 git && \   npm install && \   npm rebuild bcrypt --build-from-source && \   apk del make gcc g++ python3
+
+COPY . /NG_APP/backend
 
 RUN yarn install
 
-EXPOSE 3001
-EXPOSE 3001
+RUN git clone https://github.com/vishnubob/wait-for-it.git
 
-COPY . NG_APP/backend
+EXPOSE 3001
 
 CMD ["yarn", "dev"]
+

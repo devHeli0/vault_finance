@@ -3,7 +3,7 @@ import cors from 'cors';
 import RegisterRoute from './routes/RegisterRoute';
 import UserRoute from './routes/UserRoute';
 import AccountRoute from './routes/AccountRoute';
-import TransactionRoute from './routes/TransactionRoute';
+import TransactionRoute from './routes/TransactionsRoute';
 import AuthRoute from './routes/AuthRoute';
 
 require('dotenv').config();

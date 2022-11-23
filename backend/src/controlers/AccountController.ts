@@ -10,6 +10,7 @@ class AccountController {
     res: Response
   ): Promise<Response | void> {
     try {
+      
       let user = await UserModel.findOne({
         where: { id: req.userId },
       });
