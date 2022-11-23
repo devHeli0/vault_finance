@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "admin",
     "database": "NGAPP",
-    "host": "127.0.0.2",
+    "host": "database",
     "dialect": "postgres"
   },
   "test": {

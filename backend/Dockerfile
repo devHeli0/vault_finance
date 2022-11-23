@@ -1,8 +1,8 @@
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /NG_APP/backend
 
-RUN apk add --no-cache make gcc g++ bash python3 git && \   npm install && \   npm rebuild bcrypt --build-from-source && \   apk del make gcc g++ python3
+# RUN apk add --no-cache make gcc g++ bash python3 git && \   npm install && \   npm rebuild bcrypt --build-from-source && \   apk del make gcc g++ python3
 
 COPY . /NG_APP/backend
 
