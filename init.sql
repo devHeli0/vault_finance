@@ -1,9 +1,9 @@
 create schema "NGAPP";
 create table "NGAPP"."Users" (
     "id" SERIAL UNIQUE primary key,
-    "username" character not null,
-    "password" character not null,
-    "accountId" numeric 
+    "username" TEXT not null,
+    "password" TEXT not null,
+    "accountId" SERIAL UNIQUE
 );
 create table "NGAPP"."Accounts" (
     "id" SERIAL UNIQUE primary key,

@@ -33,7 +33,6 @@ class RegisterController {
           password: await bcrypt.hash(password, 8),
           accountId: account.id,
         });
-        console.log('FINALDALOG');
         const answer = {
           message: 'Usuário cadastrado com sucesso!',
         };

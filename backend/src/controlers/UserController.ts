@@ -3,7 +3,6 @@ import UserModel from '../database/models/UserModel';
 import * as bcrypt from 'bcrypt';
 var jwt = require('jsonwebtoken');
 
-
 class UserController {
   public async login(
     req: Request,
@@ -11,42 +10,41 @@ class UserController {
     next: NextFunction
   ): Promise<Response> {
     try {
-      console.log('###LOGIN');
+      console.log('######LOGINUSERCONTROLLER');
+
       const { username, password } = req.body;
+
+      console.log(username,password)
 
       let user = await UserModel.findOne({
         where: { username },
       });
-
-      if (!user) {
-        return res
-          .status(400)
-          .send({ message: 'Usuário ou senha inválido!' });
-      }
 
       const password_valid = await bcrypt.compare(
         password,
         user.password
       );
 
-      if (!password_valid) {
+      console.log(password_valid)
+
+      if (!user || !password_valid) {
         return res
           .status(400)
           .send({ message: 'Usuário ou senha inválido!' });
+      } else {
+        const AccessToken = jwt.sign({ id: user.id }, 'secret', {
+          expiresIn: '24h',
+        });
+
+        const answer = {
+          user: user.username,
+          password: user.password,
+          AccessToken: AccessToken,
+        };
+        res.send(answer);
+        next();
+        return;
       }
-
-      const AccessToken = jwt.sign({ id: user.id }, 'secret', {
-        expiresIn: '24h',
-      });
-
-      const answer = {
-        user: user.username,
-        password: user.password,
-        AccessToken: AccessToken,
-      };
-      res.json(answer);
-      next();
-      return;
     } catch (error) {
       next(error);
     }

@@ -39,13 +39,15 @@ const Transactions = () => {
       <input type={'text'}></input>
       {trans.transactions.map((item, index) => {
         return (
-          <div key={index}>
-            {item.id}
-            {item.debitedAccountId}
-            {item.creditedAccountId}
-            {item.value}
-            {item.createdAt}
-          </div>
+          <PageLayout>
+            <div key={index}>
+              <div key={index}>{item.id}</div>
+              <div key={index}>{item.debitedAccountId}</div>
+              <div key={index}>{item.creditedAccountId}</div>
+              <div key={index}>{item.value}</div>
+              <div key={index}>{item.createdAt}</div>
+            </div>
+          </PageLayout>
         );
       })}
       {/* <div>Oi </div>
