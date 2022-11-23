@@ -20,6 +20,7 @@ TransactionModel.init(
       unique: true,
       autoIncrement: true,
       primaryKey: true,
+      allowNull:true
     },
     debitedAccountId: {
       field: 'debitedAccountId',
@@ -66,6 +67,7 @@ TransactionModel.init(
   },
   {
     tableName: 'Transactions',
+    schema: 'NGAPP',
     timestamps: true,
     sequelize,
   }

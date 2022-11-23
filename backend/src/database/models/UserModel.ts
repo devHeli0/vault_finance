@@ -21,6 +21,7 @@ UserModel.init(
       unique: true,
       autoIncrement: true,
       primaryKey: true,
+      allowNull:true
     },
     username: {
       type: DataTypes.STRING,
@@ -41,15 +42,14 @@ UserModel.init(
     },
     accountId: {
       type: DataTypes.INTEGER,
+      field: 'accountId',
       unique: true,
-      allowNull: false,
-      validate: {
-        notEmpty: false,
-      },
-    }, 
+      allowNull:true
+    },
   },
   {
     tableName: 'Users',
+    schema: 'NGAPP',
     timestamps: false,
     sequelize,
   }

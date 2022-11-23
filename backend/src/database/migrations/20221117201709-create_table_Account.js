@@ -5,8 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.createTable('Accounts', {
       id: {
-        field: 'id',
         type: Sequelize.INTEGER,
+        field: 'id',
         unique: true,
         autoIncrement: true,
         primaryKey: true,

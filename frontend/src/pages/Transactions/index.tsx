@@ -1,32 +1,33 @@
 import '../../styles/index.css';
-import { Layout } from '../../Layout';
+import { PageLayout } from '../../Layout';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { useApi } from '../../hooks/api';
 import { Link, useNavigate } from 'react-router-dom';
 
 type Transaction = {
-  id: number,
-  debitedAccountId: number,
-  creditedAccountId: number,
-  value: number,
-  createdAt: string,
-}
+  id: number;
+  debitedAccountId: number;
+  creditedAccountId: number;
+  value: number;
+  createdAt: string;
+};
 type TransactionsState = {
-  transactions: Transaction[]
-}
-
+  transactions: Transaction[];
+};
 
 const Transactions = () => {
   const auth = useContext(AuthContext);
-  const [trans, setTrans] = useState<TransactionsState>({ transactions: [] });
+  const [trans, setTrans] = useState<TransactionsState>({
+    transactions: [],
+  });
   const [date, setDate] = useState('');
   const Api = useApi();
   const navigate = useNavigate();
 
   useEffect(() => {
     const resume = async () => {
-      console.log('###TRANSACTIONEFFECT')
+      console.log('###TRANSACTIONEFFECT');
       const res = await Api.transactionList();
       setTrans(res.data);
     };
@@ -34,16 +35,18 @@ const Transactions = () => {
   }, []);
 
   return (
-    <Layout>
+    <PageLayout>
       <input type={'text'}></input>
       {trans.transactions.map((item, index) => {
-        return<div key={index}>
-          {item.id}
-          {item.debitedAccountId}
-          {item.creditedAccountId}
-          {item.value}
-          {item.createdAt}
-        </div>
+        return (
+          <div key={index}>
+            {item.id}
+            {item.debitedAccountId}
+            {item.creditedAccountId}
+            {item.value}
+            {item.createdAt}
+          </div>
+        );
       })}
       {/* <div>Oi </div>
       <div className="flex-center">
@@ -51,7 +54,7 @@ const Transactions = () => {
             Account
           </Link>
         </div> */}
-    </Layout>
+    </PageLayout>
   );
 };
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
-import { Layout } from '../../Layout';
+import { PageLayout } from '../../Layout';
 import { api } from '../../hooks/api';
 
 const Register = () => {
@@ -21,8 +21,8 @@ const Register = () => {
   };
 
   return (
-    <Layout>
-      <form onSubmit={handleRegister} className="form">
+    <PageLayout>
+      <form onSubmit={handleRegister} className="base">
         <span className="header">
           <img src={logoNg} alt="" />
         </span>
@@ -82,7 +82,7 @@ const Register = () => {
           </Link>
         </div>
       </form>
-    </Layout>
+    </PageLayout>
   );
 };
 

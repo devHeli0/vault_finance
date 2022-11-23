@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
-import { Layout } from '../../Layout';
+import { PageLayout } from '../../Layout';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 
 const Login = () => {
@@ -27,8 +27,8 @@ const Login = () => {
   };
 
   return (
-    <Layout>
-      <form className="form" onSubmit={handleLogin}>
+    <PageLayout>
+      <form className="base" onSubmit={handleLogin}>
         <span className="header">
           <img src={logoNg} alt="" />
         </span>
@@ -76,7 +76,7 @@ const Login = () => {
           </Link>
         </div>
       </form>
-    </Layout>
+    </PageLayout>
   );
 };
 

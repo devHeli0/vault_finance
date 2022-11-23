@@ -2,7 +2,7 @@ import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { api, useApi } from '../../hooks/api';
-import { Layout } from '../../Layout';
+import { PageLayout } from '../../Layout';
 
 const Account = () => {
   const auth = useContext(AuthContext);
@@ -36,8 +36,8 @@ const Account = () => {
   };
 
   return (
-    <Layout>
-      <form onSubmit={Pay} className="form">
+    <PageLayout>
+      <form onSubmit={Pay} className="base">
         <span className="header-tittle">
           Account #{data.account}
           <div>R$ {data.balance}</div>
@@ -81,7 +81,7 @@ const Account = () => {
         </div>
       </form>
       <h2></h2>
-    </Layout>
+    </PageLayout>
   );
 };
 

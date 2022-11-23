@@ -15,8 +15,9 @@ class RegisterController {
       let user = await UserModel.findOne({
         where: { username },
       });
-
+      
       if (user) {
+        console.log('USER');
         return res.json('Usuário já existe!');
       } else {
         const account = await AccountModel.create();
@@ -32,7 +33,7 @@ class RegisterController {
           password: await bcrypt.hash(password, 8),
           accountId: account.id,
         });
-
+        console.log('FINALDALOG');
         const answer = {
           message: 'Usuário cadastrado com sucesso!',
         };

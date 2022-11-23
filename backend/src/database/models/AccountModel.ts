@@ -23,10 +23,7 @@ AccountModel.init(
       unique: true,
       autoIncrement: true,
       primaryKey: true,
-      allowNull: false,
-      validate: {
-        notEmpty: false,
-      },
+      allowNull:true
     },
     balance: {
       type: DataTypes.FLOAT,
@@ -34,6 +31,7 @@ AccountModel.init(
   },
   {
     tableName: 'Accounts',
+    schema: 'NGAPP',
     timestamps: false,
     sequelize,
   }
