@@ -14,13 +14,8 @@ const Login = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    if (username && password) {
-      if (await auth.signIn(username, password)) {
-        navigate('/account');
-      } else {
-        alert(`Opa...talvez seja melhor tentar outra hora!`);
-      }
-    }
+    await auth.signIn(username, password);
+    navigate('/account');
   };
 
   return (
