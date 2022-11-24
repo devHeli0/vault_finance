@@ -17,7 +17,6 @@ class RegisterController {
       });
 
       if (user) {
-        console.log('USER');
         return res.json('Usuário já existe!');
       } else {
         const account = await AccountModel.create();

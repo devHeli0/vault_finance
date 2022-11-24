@@ -30,7 +30,6 @@ const Account = () => {
     e.preventDefault();
     if (username && value) {
       const answer = await Api.transaction(username, Number(value));
-      console.log(answer.data);
       window.alert(answer.data);
     }
   };

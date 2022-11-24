@@ -16,15 +16,11 @@ export const AuthProvider = ({
   const location = useLocation();
 
   useEffect(() => {
-    console.log('###USEEFFECT');
-    console.log('#LOCATION', location);
     const AccessToken = localStorage.getItem('AccessToken');
     const validateToken = async () => {
-      console.log('###VALIDATETOKEN');
       if (AccessToken) {
-        console.log('###AccessToken', AccessToken);
         await api.validateToken();
-        console.log('#APIRETURN');
+
         navigate('/account');
       } else {
         alert('Acesso restrito! Usuário não logado.');

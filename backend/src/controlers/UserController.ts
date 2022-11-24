@@ -10,11 +10,7 @@ class UserController {
     next: NextFunction
   ): Promise<Response> {
     try {
-      console.log('######LOGINUSERCONTROLLER');
-
       const { username, password } = req.body;
-
-      console.log(username,password)
 
       let user = await UserModel.findOne({
         where: { username },
@@ -24,8 +20,6 @@ class UserController {
         password,
         user.password
       );
-
-      console.log(password_valid)
 
       if (!user || !password_valid) {
         return res
@@ -40,7 +34,7 @@ class UserController {
           user: user.username,
           password: user.password,
           AccessToken: AccessToken,
-          message: 'Entrando...'
+          message: 'Entrando...',
         };
         res.send(answer);
         next();

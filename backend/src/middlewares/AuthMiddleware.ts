@@ -7,7 +7,6 @@ class AuthMiddleware {
     res: Response,
     next: NextFunction
   ) {
-    console.log('###MIDDDLLEEWAAAREEEEE');
     const { authorization } = req.headers;
 
     if (!authorization)

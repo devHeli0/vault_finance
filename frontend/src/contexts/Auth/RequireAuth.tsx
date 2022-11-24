@@ -6,13 +6,13 @@ export const RequireAuth = ({
 }: {
   children: JSX.Element;
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
   useEffect(() => {
-    console.log(auth)
+    auth;
   }, [auth]);
   if (!auth.user) {
-    navigate ('/');
+    navigate('/');
   }
   return children;
 };

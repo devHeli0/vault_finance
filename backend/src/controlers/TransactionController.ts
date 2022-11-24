@@ -8,7 +8,6 @@ class TransactionController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    console.log('###RECEBIOSNOMES')
     const { username, value } = req.body;
 
     const account = await UserModel.findOne({

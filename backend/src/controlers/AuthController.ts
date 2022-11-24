@@ -8,10 +8,7 @@ class AuthController {
     res: Response,
     next: NextFunction
   ): Promise<Response | void> {
-    console.log('###TOKEN');
     const { authorization } = req.headers;
-
-    console.log(authorization);
 
     if (!authorization)
       return res.status(401).json({ message: 'Acesso restrito!' });
