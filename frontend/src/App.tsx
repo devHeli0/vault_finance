@@ -20,7 +20,7 @@ function App() {
           }
         />
                <Route
-          path="/transactions"
+          path="/transaction"
           element={
             <RequireAuth>
               <Transactions />

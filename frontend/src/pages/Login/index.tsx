@@ -12,10 +12,16 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-    await auth.signIn(username, password);
-    navigate('/account');
+  const handleLogin = async (e:any) => {
+    e.preventDefault()
+    if (username && password) {
+      const answer = await auth.signIn(username, password);
+      if (answer) {
+        navigate('/account');
+      } else {
+        alert('Não deu certo.');
+      }
+    }
   };
 
   return (

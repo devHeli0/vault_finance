@@ -1,9 +1,10 @@
 import '../../styles/index.css';
 import { PageLayout } from '../../Layout';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/Auth/AuthContext';
+import { useEffect, useState } from 'react';
 import { useApi } from '../../hooks/api';
 import { Link, useNavigate } from 'react-router-dom';
+import '../../styles/index.css';
+
 
 type Transaction = {
   id: number;
@@ -20,46 +21,63 @@ const Transactions = () => {
   const [trans, setTrans] = useState<TransactionsState>({
     transactions: [],
   });
-  const [date, setDate] = useState('');
+
   const Api = useApi();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const resume = async () => {
-      console.log('###TRANSACTIONEFFECT');
       const res = await Api.transactionList();
       setTrans(res.data);
     };
     resume();
   }, []);
 
+  const [busca, setBusca] = useState('');
+
+  const filtering = trans.transactions.filter(item => item.createdAt.toString().includes(busca));
+
   return (
     <PageLayout>
-      <input type={'text'}></input>
-      {trans.transactions.map((item, index) => {
-        return (
-          <PageLayout>
-            <div key={index}>
-              <div key={index}>{item.id}</div>
-              <div key={index}>{item.debitedAccountId}</div>
-              <div key={index}>{item.creditedAccountId}</div>
-              <div key={index}>{item.value}</div>
-              <div key={index}>{item.createdAt}</div>
-            </div>
-            <div className="flex-center">
-              <Link className="btn" to="/account">
-                Pagina inicial
-              </Link>
-            </div>
-          </PageLayout>
-        );
-      })}
-      {/* <div>Oi </div>
-      <div className="flex-center">
-          <Link className="btn" to="/account">
-            Account
-          </Link>
-        </div> */}
+      <div className="wrapper-input">
+        <input
+          className={busca !== '' ? 'occupiedBox input' : 'input'}
+          type="search"
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+        />
+        <span
+          className="focus-input"
+          data-placeholder="busca pela data de transação*"
+        ></span>
+      </div>
+      <table className="table">
+        <caption>Lista de transações</caption>
+        <thead>
+          <tr className="table-head">
+            <th>ID</th>
+            <th>Account</th>
+            <th>CashOut</th>
+            <th>R$</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filtering.map((item, index) => {
+            return (
+              <tr key={item.createdAt}>
+                <td>{item.id}</td>
+                <td>{item.debitedAccountId}</td>
+                <td>{item.creditedAccountId}</td>
+                <td>{item.value}</td>
+                <td>{item.createdAt}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <Link className="btn" to="/account">
+        Account
+      </Link>
     </PageLayout>
   );
 };

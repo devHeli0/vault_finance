@@ -6,47 +6,47 @@ export const api = axios.create({
 
 export const useApi = () => ({
   validateToken: async () => {
-    const response = await api.get('/auth', {
+    const answer = await api.get('/auth', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           'AccessToken'
         )}`,
       },
     });
-    return response;
+    return answer;
   },
   signIn: async (username: string, password: string) => {
     const answer = await api.post('/', { username, password });
-    return answer;//answer.data.message
+    return answer.data;//answer.data.message
   },
   resume: async () => {
-    const response = await api.get('/account', {
+    const answer = await api.get('/account', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           'AccessToken'
         )}`,
       },
     });
-    return response;
+    return answer;
   },
   transaction: async (username: string, value: number) => {
-    const response = await api.post('/transaction',{username, value}, {
+    const answer = await api.post('/transaction',{username, value}, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           'AccessToken'
         )}`,
       },
     });
-    return response;
+    return answer;
   },
   transactionList: async () => {
-    const response = await api.get('/transaction', {
+    const answer = await api.get('/transaction', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           'AccessToken'
         )}`,
       },
     });
-    return response;
+    return answer;
   },
 });

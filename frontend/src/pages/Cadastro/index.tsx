@@ -6,16 +6,20 @@ import { PageLayout } from '../../Layout';
 import { api } from '../../hooks/api';
 
 const Register = () => {
-  //const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
+  const handleRegister = async (e: any) => {
+    e.preventDefault();
     const data = { username, password };
     const answer = await api.post('/cadastro', data);
-    if (answer) {
+    if (answer.data.message = 'Usuário cadastrado com sucesso!') {
       window.alert(answer.data.message);
+      navigate('/')
+    }else{
+      window.alert(answer.data.message);
+      window.location.reload(); 
     }
   };
 
@@ -59,9 +63,9 @@ const Register = () => {
             data-placeholder="password"
           ></span>
         </div>
-          <button type="submit" className="btn">
-            Cadastrar
-          </button>
+        <button type="submit" className="btn">
+          Cadastrar
+        </button>
         <span className="txt3">
           *username deve conter no mínimo 3 caracteres
         </span>

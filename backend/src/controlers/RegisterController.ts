@@ -15,7 +15,7 @@ class RegisterController {
       let user = await UserModel.findOne({
         where: { username },
       });
-      
+
       if (user) {
         console.log('USER');
         return res.json('Usuário já existe!');

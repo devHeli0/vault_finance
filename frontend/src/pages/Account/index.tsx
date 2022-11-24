@@ -70,7 +70,7 @@ const Account = () => {
           Enviar pagamento
         </button>
         <div className="flex-center">
-          <Link className="btn" to="/transactions">
+          <Link className="btn" to="/transaction">
             Lista de transações
           </Link>
         </div>

@@ -23,9 +23,9 @@ export const AuthProvider = ({
       console.log('###VALIDATETOKEN');
       if (AccessToken) {
         console.log('###AccessToken', AccessToken);
-        const data = await api.validateToken();
-        console.log('#APIRETURN', data);
-        if (!data) navigate('/');
+        await api.validateToken();
+        console.log('#APIRETURN');
+        navigate('/account');
       } else {
         alert('Acesso restrito! Usuário não logado.');
         navigate('/');
@@ -37,9 +37,9 @@ export const AuthProvider = ({
   }, [location.pathname]);
 
   const signIn = async (username: string, password: string) => {
-    alert('Entrando...');
     const answer = await api.signIn(username, password);
     if (answer.user && answer.AccessToken) {
+      alert(answer.message);
       setUser(answer.user); //.user
       setToken(answer.AccessToken); //.AccessToken
       return true;
