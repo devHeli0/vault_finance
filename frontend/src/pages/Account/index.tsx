@@ -1,7 +1,7 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
-import { api, useApi } from '../../hooks/api';
+import { useApi } from '../../hooks/api';
 import { PageLayout } from '../../Layout';
 
 const Account = () => {

@@ -2,9 +2,8 @@ import '../../styles/index.css';
 import { PageLayout } from '../../Layout';
 import { useEffect, useState } from 'react';
 import { useApi } from '../../hooks/api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../styles/index.css';
-
 
 type Transaction = {
   id: number;
@@ -34,7 +33,9 @@ const Transactions = () => {
 
   const [busca, setBusca] = useState('');
 
-  const filtering = trans.transactions.filter(item => item.createdAt.toString().includes(busca));
+  const filtering = trans.transactions.filter((item) =>
+    item.createdAt.toString().includes(busca)
+  );
 
   return (
     <PageLayout>
@@ -54,9 +55,9 @@ const Transactions = () => {
         <caption>Lista de transações</caption>
         <thead>
           <tr className="table-head">
-            <th>ID</th>
-            <th>Account</th>
-            <th>CashOut</th>
+            <th>#</th>
+            <th>Debited Account</th>
+            <th>Credited Account</th>
             <th>R$</th>
             <th>Date</th>
           </tr>
@@ -65,9 +66,9 @@ const Transactions = () => {
           {filtering.map((item, index) => {
             return (
               <tr key={item.createdAt}>
-                <td>{item.id}</td>
-                <td>{item.debitedAccountId}</td>
-                <td>{item.creditedAccountId}</td>
+                <td>#{item.id}</td>
+                <td>#{item.debitedAccountId}</td>
+                <td>#{item.creditedAccountId}</td>
                 <td>{item.value}</td>
                 <td>{item.createdAt}</td>
               </tr>

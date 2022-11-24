@@ -21,24 +21,30 @@ class UserController {
         user.password
       );
 
-      if (!user || !password_valid) {
+      if (!user) {
         return res
           .status(400)
           .send({ message: 'Usuário ou senha inválido!' });
       } else {
-        const AccessToken = jwt.sign({ id: user.id }, 'secret', {
-          expiresIn: '24h',
-        });
-
-        const answer = {
-          user: user.username,
-          password: user.password,
-          AccessToken: AccessToken,
-          message: 'Entrando...',
-        };
-        res.send(answer);
-        next();
-        return;
+        if (!password_valid) {
+          res
+            .status(400)
+            .send({ message: 'Usuário ou senha inválido!' });
+          return;
+        } else {
+          const AccessToken = jwt.sign({ id: user.id }, 'secret', {
+            expiresIn: '24h',
+          });
+          const answer = {
+            user: user.username,
+            password: user.password,
+            AccessToken: AccessToken,
+            message: 'Entrando...',
+          };
+          res.send(answer);
+          next();
+          return;
+        }
       }
     } catch (error) {
       next(error);

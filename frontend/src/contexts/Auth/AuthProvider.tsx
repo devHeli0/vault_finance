@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/api';
 import { User } from '../../types/User';
 import { AuthContext } from './AuthContext';
@@ -36,8 +36,8 @@ export const AuthProvider = ({
     const answer = await api.signIn(username, password);
     if (answer.user && answer.AccessToken) {
       alert(answer.message);
-      setUser(answer.user); //.user
-      setToken(answer.AccessToken); //.AccessToken
+      setUser(answer.user); 
+      setToken(answer.AccessToken); 
       return true;
     }
     return false;

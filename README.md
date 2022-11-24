@@ -1,19 +1,13 @@
-To run the project on your machine, you will need Postgres or docker installed to start Pg.
+Pra rodar o projeto basta ter o docker instalado no computador. 
 
-So, open your terminal and: 
---name postgres-container -e DB_PASS=admin -d -p 5432:5432 postgres:5.7. 
+Abra o terminal do seu aditor de texto na raiz do projeto digite a seguinte sequência: 
 
-cd ./backend 
+yarn install 
 
-yarn dev
+docker compose build --no-cache
 
-/*wait some seconds until the container creates, and the server exposes 3001 PORT*/
+docker compoe up 
 
-cd ./frontend
+Espere alguns segundos para o build ser feito e as portas serem expostas. Para verificar o banco de dados basta ter acesso a um terminal SQL ou gui (Dbeaver,pgadmin e etc).
 
-yarn start 
-
-/*Now your 3000 PORT is open to browser use*/
-
-Enjoy!!
  

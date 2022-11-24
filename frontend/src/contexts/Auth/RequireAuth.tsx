@@ -9,7 +9,7 @@ export const RequireAuth = ({
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   useEffect(() => {
-    auth;
+    console.log(auth);
   }, [auth]);
   if (!auth.user) {
     navigate('/');
