@@ -11,8 +11,7 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async (e: any) => {
-    e.preventDefault();
+  const handleRegister = async () => {
     const data = { username, password };
     const answer = await api.post('/cadastro', data);
     if (answer) {
@@ -60,15 +59,9 @@ const Register = () => {
             data-placeholder="password"
           ></span>
         </div>
-        <div container-btn>
-          <button
-            type="submit"
-            className="btn"
-            onClick={handleRegister}
-          >
+          <button type="submit" className="btn">
             Cadastrar
           </button>
-        </div>
         <span className="txt3">
           *username deve conter no mínimo 3 caracteres
         </span>

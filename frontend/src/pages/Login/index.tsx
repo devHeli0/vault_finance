@@ -4,7 +4,6 @@ import logoNg from '../../assets/logo_ng.png';
 import '../../styles/index.css';
 import { PageLayout } from '../../Layout';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
-import { api } from '../../hooks/api';
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -16,16 +15,10 @@ const Login = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     if (username && password) {
-      const answer = await auth.signIn(username, password);
-      const data = { username, password };
-      const response = await api.get('/', { data });
-      if (answer) {       
-        alert(`Bem vindo ${response.data.user}!`);
+      if (await auth.signIn(username, password)) {
         navigate('/account');
-        return 
       } else {
-        alert(`Opa...${response.data.console.error()};
-        }!`);
+        alert(`Opa...talvez seja melhor tentar outra hora!`);
       }
     }
   };

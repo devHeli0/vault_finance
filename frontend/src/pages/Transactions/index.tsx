@@ -17,7 +17,6 @@ type TransactionsState = {
 };
 
 const Transactions = () => {
-  const auth = useContext(AuthContext);
   const [trans, setTrans] = useState<TransactionsState>({
     transactions: [],
   });
@@ -46,6 +45,11 @@ const Transactions = () => {
               <div key={index}>{item.creditedAccountId}</div>
               <div key={index}>{item.value}</div>
               <div key={index}>{item.createdAt}</div>
+            </div>
+            <div className="flex-center">
+              <Link className="btn" to="/account">
+                Pagina inicial
+              </Link>
             </div>
           </PageLayout>
         );

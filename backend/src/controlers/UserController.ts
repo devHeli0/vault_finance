@@ -40,6 +40,7 @@ class UserController {
           user: user.username,
           password: user.password,
           AccessToken: AccessToken,
+          message: 'Entrando...'
         };
         res.send(answer);
         next();

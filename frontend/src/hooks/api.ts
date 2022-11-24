@@ -17,7 +17,7 @@ export const useApi = () => ({
   },
   signIn: async (username: string, password: string) => {
     const answer = await api.post('/', { username, password });
-    return answer.data;
+    return answer.data.message;
   },
   resume: async () => {
     const response = await api.get('/account', {
