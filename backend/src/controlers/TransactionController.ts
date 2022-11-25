@@ -8,17 +8,17 @@ class TransactionController {
     req: Request,
     res: Response
   ): Promise<Response | void> {
-    const { username, value } = req.body;
-
-    const account = await UserModel.findOne({
-      where: { username },
-      attributes: ['accountId'],
-    });
-
-    let debitedId = await AccountModel.findByPk(req.userId);
-    let creditedId = await AccountModel.findByPk(account.accountId);
-
     try {
+      const { username, value } = req.body;
+
+      const account = await UserModel.findOne({
+        where: { username },
+        attributes: ['accountId'],
+      });
+
+      let debitedId = await AccountModel.findByPk(req.userId);
+      let creditedId = await AccountModel.findByPk(account.accountId);
+
       if (debitedId.id === creditedId.id) {
         return res.send('Selecione um usuário válido');
       } else {
@@ -50,6 +50,9 @@ class TransactionController {
           if (transaction) {
             res.send('Transação realizada com sucesso!');
             return;
+          } else {
+            res.send('Transação não realizada, tente novamente!');
+            return;
           }
         } else {
           res.send(
@@ -80,10 +83,9 @@ class TransactionController {
         ],
       });
 
-      const answer= {transactions}
+      const answer = { transactions };
 
       res.send(answer);
-
     } catch (error) {
       res.status(500).send({
         message: 'Falha ao renderizar lista de transações!',
