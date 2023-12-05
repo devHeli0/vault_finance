@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  backend:
-    container_name: 'TRYBE_backend'
-    build: ./backend
+  ngBackDev:
+    container_name: 'TRYBE_ngBackDev'
+    build: ./ngBackDev
     ports:
       - 3001:3001
     volumes:
-      #- ./backend/package.json:/NG_APP/backend
-      - /NG_AP/backend/node_modules
-    command: yarn dev  
+      #- ./ngBackDev/package.json:/NG_APP/ngBackDev
+      - /NG_AP/ngBackDev/node_modules
+    command: yarn dev
     environment:
       - PORT=3001
       - DB_USER=postgres
@@ -21,7 +21,7 @@ services:
       test: ['CMD', 'lsof', '-i', ':3001']
       timeout: 10s
       retries: 5
- 
+
   frontend:
     container_name: 'TRYBE_frontend'
     build: ./frontend
@@ -29,7 +29,7 @@ services:
       - 3000:3000
     environment:
       - REACT_APP_HOST = http://frontend:3000
-      - REACT_APP_API = http://backend:3001
+      - REACT_APP_API = http://ngBackDev:3001
 
   database:
     container_name: 'TRYBE_postgres'

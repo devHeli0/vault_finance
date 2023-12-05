@@ -1,0 +1,6 @@
+[submodule "ngBackDev"]
+	path = ngBackDev
+	url = https://github.com/devHeli0/ngBack.git
+[submodule "ngFrontDev"]
+	path = ngFrontDev
+	url = https://github.com/devHeli0/ngFront.git
