@@ -1,14 +1,11 @@
 version: '3'
 
 services:
-  ngBackDev:
+  ngbackdev:
     container_name: 'TRYBE_ngBackDev'
     build: ./ngBackDev
     ports:
       - 3001:3001
-    volumes:
-      #- ./ngBackDev/package.json:/NG_APP/ngBackDev
-      - /NG_AP/ngBackDev/node_modules
     command: yarn dev
     environment:
       - PORT=3001
@@ -22,14 +19,14 @@ services:
       timeout: 10s
       retries: 5
 
-  frontend:
-    container_name: 'TRYBE_frontend'
-    build: ./frontend
-    ports:
-      - 3000:3000
-    environment:
-      - REACT_APP_HOST = http://frontend:3000
-      - REACT_APP_API = http://ngBackDev:3001
+  # frontend:
+  #   container_name: 'TRYBE_frontend'
+  #   build: ./frontend
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - REACT_APP_HOST = http://frontend:3000
+  #     - REACT_APP_API = http://ngBackDev:3001
 
   database:
     container_name: 'TRYBE_postgres'
@@ -47,8 +44,8 @@ services:
       retries: 5
     cap_add:
       - SYS_NICE
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    # volumes:
+    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
   default:
     # Use a custom driver
