@@ -10,36 +10,42 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - ./data:/var/lib/postgresql/data
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U devUser -d NGDB -h localhost -p 5432"]
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U devUser -d NGDB -h localhost -p 5432',
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
     cap_add:
       - SYS_NICE
 
-  ngbackdev:
-    container_name: 'VT_CT_ngBackDev'
-    build: ./ngBackDev
-    ports:
-      - 3001:3001 
-    environment:
-      - PORT=${PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_PORT=${DB_PORT}
-    volumes:
-      - ./ngBackDev:/CT_ngBackDev
-    restart: always
-    healthcheck:
-      test: ['CMD', 'lsof', '-i', ':3001']
-      timeout: 10s
-      retries: 5
-    depends_on:
-      - database
+  # ngbackdev:
+  #   container_name: 'VT_CT_ngBackDev'
+  #   build: ./ngBackDev
+  #   ports:
+  #     - 3001:3001
+  #   environment:
+  #     - PORT=${PORT}
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASS=${DB_PASS}
+  #     - DB_HOST=${DB_HOST}
+  #     - DB_NAME=${DB_NAME}
+  #     - DB_PORT=${DB_PORT}
+  #   volumes:
+  #     - ./ngBackDev:/CT_ngBackDev
+  #   restart: always
+  #   healthcheck:
+  #     test: ['CMD', 'nc', '-z', 'localhost', '3001']
+  #     timeout: 10s
+  #     retries: 5
+  #   depends_on:
+  #     - database
 
   # frontend:
   #   container_name: 'TRYBE_frontend'
